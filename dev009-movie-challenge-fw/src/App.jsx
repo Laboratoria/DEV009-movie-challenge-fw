@@ -4,14 +4,12 @@ import MoviesRepository from './utils/api/moviesRepository';
 import ListMovies from './components/ListMovies';
 import OrderBy from './components/OrderBy';
 import MovieFilter from './components/MoviesFilter';
-//import './routes/index';
-//import { Link } from 'react-router-dom';
+import MovieDetail from './components/MovieDetail';
 
 const MoviesAdmin = () => {
   const [list, setList] = useState([]);
   const [selectedSortOption, setSelectedSortOption] = useState('title-asc');
   const [filteredYear, setFilteredYear] = useState('all');
- // const [selectedMovieId, setSelectedMovieId] = useState(null); 
 
   const handleYearFilterChange = (year) => {
     setFilteredYear(year);
@@ -90,6 +88,7 @@ const MoviesAdmin = () => {
           {/* Lista de películas  */}
           <ListMovies filteredYear={filteredYear} sortedList={sortedList} />
         </div>
+        
       </main>
     </div>
   );

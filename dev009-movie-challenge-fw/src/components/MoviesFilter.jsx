@@ -23,7 +23,7 @@ const MovieFilter = ({ movies, onYearFilterChange, filteredYear }) => {
         value={selectedYear}
         onChange={handleYearChange}
       >
-        <option value="all">All</option> {/* Add an "All" option */}
+        <option value="all">All</option> 
         {years.map((year) => (
           <option key={year} value={year}>
             {year}

@@ -2,7 +2,7 @@
 
 ### Sprint learnings
 
-Aprendi a crear una aplicación React usando ViteJS.
+Aprendí a crear una aplicación React usando ViteJS.
 
 ### Added
 
@@ -15,4 +15,4 @@ Se pudo consumir la API,extrayendo la imagen, titulo, año y score.
 
 ### Removed
 
-Se elimino la función de filtrar por director.
+Se eliminó la función de filtrar por director.
