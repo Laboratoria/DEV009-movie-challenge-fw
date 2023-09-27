@@ -11,6 +11,7 @@ const OrderBy = ({ selectedSortOption, handleSortOptionChange }) => {
         value={selectedSortOption}
         onChange={handleSortOptionChange}
       >
+        <option value="All">All</option>
         <option value="title-asc">A - Z</option>
         <option value="title-desc">Z - A</option>
         <option value="vote_average-asc">Score Low - High</option>
