@@ -138,3 +138,19 @@ main{
     font-size: small;
   }
 }
+
+.movie-detail{
+  font-family: var(--font-family-main-text);
+  background-color: var(--container-color);
+}
+.mt-5{
+  padding-left:125px;
+}
+.custom-button {
+  background-color:#4FC34D;
+  color:#fcfcfc;
+}
+.movie-title{
+  font-size: 24px;
+  font-weight: bold;
+}

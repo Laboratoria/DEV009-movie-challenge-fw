@@ -1,15 +1,18 @@
 import React, { useState, useMemo } from 'react';
 import './App.css';
+import { BrowserRouter as Router ,Route,Routes, Link } from 'react-router-dom';
 import MoviesRepository from './utils/api/moviesRepository';
+import Header from './components/Header';
 import ListMovies from './components/ListMovies';
 import OrderBy from './components/OrderBy';
 import MovieFilter from './components/MoviesFilter';
 import MovieDetail from './components/MovieDetail';
 
-const MoviesAdmin = () => {
+const MovieAdmin = () => {
   const [list, setList] = useState([]);
   const [selectedSortOption, setSelectedSortOption] = useState('title-asc');
   const [filteredYear, setFilteredYear] = useState('all');
+  const [selectedMovie, setSelectedMovie] = useState(null);
 
   const handleYearFilterChange = (year) => {
     setFilteredYear(year);
@@ -23,9 +26,9 @@ const MoviesAdmin = () => {
     setSelectedSortOption(event.target.value);
   };
 
- // const handleMovieClick = (movieId) => {
-  //  setSelectedMovieId(movieId);
-  //};
+ const handleMovieClick = (movieId) => {
+    setSelectedMovie(movieId);
+  };
 
   const sortedList = useMemo(() => {
     const [sortField, sortOrder] = selectedSortOption.split('-');
@@ -48,17 +51,9 @@ const MoviesAdmin = () => {
 
   return (
     <div>
-      <header>
-        <nav>
-          <ul>
-            <li><a href="#side">Home</a></li>
-            <li><a href="#side">Movies</a></li>
-            <svg xmlns="http://www.w3.org/2000/svg" height="2em" viewBox="0 0 512 512"><path d="M416 208c0 45.9-14.9 88.3-40 122.7L502.6 457.4c12.5 12.5 12.5 32.8 0 45.3s-32.8 12.5-45.3 0L330.7 376c-34.4 25.2-76.8 40-122.7 40C93.1 416 0 322.9 0 208S93.1 0 208 0S416 93.1 416 208zM208 352a144 144 0 1 0 0-288 144 144 0 1 0 0 288z"/></svg>
-          </ul>
-        </nav>
-      </header>
+        <Header />
 
-      <div className="presentation">
+        <div className="presentation">
         <div className="intro-text">
           <h1>WANDERLUST<br />MOVIES TRAVELER COMMUNITY</h1>
           <div>
@@ -75,23 +70,24 @@ const MoviesAdmin = () => {
         </div>
       </div>
 
-      <main>
-        <div className="side">
-          <div className="filters">
-            <MovieFilter movies={list} onYearFilterChange={handleYearFilterChange} filteredYear={filteredYear} />
-            <OrderBy selectedSortOption={selectedSortOption} handleSortOptionChange={handleSortOptionChange} />
+        <main>
+          <div className="side">
+            <div className="filters">
+              <MovieFilter movies={list} onYearFilterChange={handleYearFilterChange} filteredYear={filteredYear} />
+              <OrderBy selectedSortOption={selectedSortOption} handleSortOptionChange={handleSortOptionChange} />
+            </div>
           </div>
+
+          <div className="movies">
+            <MoviesRepository moviesFetched={handleMoviesFetched} /> 
+            {/* Lista de películas  */}
+            <ListMovies filteredYear={filteredYear} sortedList={sortedList} onMovieClick={handleMovieClick}/>
+
         </div>
 
-        <div className="movies">
-          <MoviesRepository moviesFetched={handleMoviesFetched} /> 
-          {/* Lista de películas  */}
-          <ListMovies filteredYear={filteredYear} sortedList={sortedList} />
-        </div>
-        
-      </main>
+        </main>
     </div>
   );
 };
 
-export default MoviesAdmin;
+export default MovieAdmin;

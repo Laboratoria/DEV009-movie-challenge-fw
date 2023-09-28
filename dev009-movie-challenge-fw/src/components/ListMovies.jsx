@@ -1,4 +1,5 @@
 import React, { useMemo } from 'react';
+import { Link } from 'react-router-dom';
 
 const ListMovies = ({ sortedList, filteredYear }) => {
   const filteredAndSortedMovies = useMemo(() => {
@@ -11,20 +12,23 @@ const ListMovies = ({ sortedList, filteredYear }) => {
     }
 
     return filteredMovies;
+    
   }, [sortedList, filteredYear]);
 
   return (
     <div className="movies-grid">
       {filteredAndSortedMovies.map((movie) => (
-        <div key={movie.id} className="movie-card">
-          <img
-            src={`https://image.tmdb.org/t/p/w200${movie.poster_path}`}
-            alt={movie.title}
-            className="movie-poster"
-          />
-          <p className="movie-title">{movie.title}</p>
-          <p className="movie-score">{'Score:' + movie.vote_average}</p>
-        </div>
+        <Link to = {'/movie/'+movie.id}>
+          <div key={movie.id} className="movie-card">
+            <img
+              src={`https://image.tmdb.org/t/p/w200${movie.poster_path}`}
+              alt={movie.title}
+              className="movie-poster"
+            />
+            <p className="movie-title">{movie.title}</p>
+            <p className="movie-score">{'Score:' + movie.vote_average}</p>
+          </div>
+        </Link>
       ))}
     </div>
   );

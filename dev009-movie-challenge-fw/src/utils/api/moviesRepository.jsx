@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 
 const MoviesRepository = ({ moviesFetched }) => {
   const [list, setList] = useState([]);
@@ -11,11 +11,13 @@ const MoviesRepository = ({ moviesFetched }) => {
         if (responseData && responseData.results) {
           const movies = responseData.results;
           setList(movies);
-          moviesFetched(movies); // Call the function provided by App.jsx
           
           // Extract movie IDs into an array
           const ids = movies.map(movie => movie.id);
           setMovieIds(ids);
+          console.log(movieIds); // Check the value of movieIds
+
+          moviesFetched(movies, ids); // Pass both movies and movieIds to the function provided by App.jsx
         } else {
           console.error('La respuesta de la API está vacía o no es válida.');
         }
@@ -23,9 +25,22 @@ const MoviesRepository = ({ moviesFetched }) => {
       .catch(err => {
         console.error(err.message);
       });
-  }, [moviesFetched]);
+  },  [moviesFetched, movieIds]);
 
   return null; // No es necesario representar nada en este componente
+};
+
+export const getOne = (movieId) => {
+  return fetch(`https://api.themoviedb.org/3/movie/${movieId}?api_key=ce209e5ff09d9bb827b2cd4025cd595c`)
+    .then(response => response.json())
+    .then(responseData => {
+      if (responseData) {
+        return responseData; // Devuelve directamente los datos de la película
+      } else {
+        console.error('La respuesta de la API está vacía o no es válida.');
+        return null; // Puedes devolver null u otro valor apropiado en caso de error
+      }
+    });
 };
 
 export default MoviesRepository;
