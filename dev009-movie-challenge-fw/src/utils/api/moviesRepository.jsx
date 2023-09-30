@@ -43,4 +43,21 @@ export const getOne = (movieId) => {
     });
 };
 
+export const getGenre = (movieId) => {
+  const options = {
+    method: 'GET',
+    headers: {
+      accept: 'application/json',
+      Authorization: 'Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiJjZTIwOWU1ZmYwOWQ5YmI4MjdiMmNkNDAyNWNkNTk1YyIsInN1YiI6IjY1MGE2MGE0ZDZjMzAwMDBjY2UwZjZjYSIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.wlDc2oGZoiPKCJY1QUu-CCVAnCHRNQ5AkwBMPwnwiBY'
+    }
+  };
+  return fetch('https://api.themoviedb.org/3/genre/tv/list?language=en', options)
+    .then(response => response.json())
+    .then(response => {
+      console.log(response);
+      return response;
+    })
+    .catch(err => console.error(err));
+};
+
 export default MoviesRepository;

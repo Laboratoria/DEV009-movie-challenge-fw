@@ -6,7 +6,7 @@ import { getOne } from '../utils/api/moviesRepository';
 
 
 
-const MovieDetail = () => {
+const MovieDetail = ({genres}) => {
   const [selectedMovie, setSelectedMovie] = useState({});
   const { movieId } = useParams(); // Obtiene el movieId de los parámetros de la URL
 
@@ -53,6 +53,20 @@ const MovieDetail = () => {
           <p>No production companies available</p>
         )}
       </div>
+      <div className="movie-genres">
+        <h3>Genres:</h3>
+        <ul>
+          {selectedMovie.genre_ids?.map((genreId) => (
+            
+            <li key={genreId}>
+              
+              {genres.find((genre) => genre.id === genreId)?.name}
+              
+            </li>
+          ))}
+        </ul>
+      </div>
+
       </div>
     </div>
     </div>

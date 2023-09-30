@@ -13,9 +13,13 @@ const MovieAdmin = () => {
   const [selectedSortOption, setSelectedSortOption] = useState('title-asc');
   const [filteredYear, setFilteredYear] = useState('all');
   const [selectedMovie, setSelectedMovie] = useState(null);
-
+  const [filteredGenre, setFilteredGenre] = useState('all'); 
+  
   const handleYearFilterChange = (year) => {
     setFilteredYear(year);
+  };
+  const handleGenreFilterChange = (genre) => {
+    setFilteredGenre(genre);
   };
 
   const handleMoviesFetched = (movies) => {
@@ -73,18 +77,28 @@ const MovieAdmin = () => {
         <main>
           <div className="side">
             <div className="filters">
-              <MovieFilter movies={list} onYearFilterChange={handleYearFilterChange} filteredYear={filteredYear} />
+            <MovieFilter
+              movies={list}
+              onYearFilterChange={handleYearFilterChange}
+              onGenreFilterChange={handleGenreFilterChange} // Make sure this is passed correctly
+              filteredYear={filteredYear}
+              filteredGenre={filteredGenre}
+            />
+
               <OrderBy selectedSortOption={selectedSortOption} handleSortOptionChange={handleSortOptionChange} />
             </div>
           </div>
 
           <div className="movies">
             <MoviesRepository moviesFetched={handleMoviesFetched} /> 
-            {/* Lista de películas  */}
-            <ListMovies filteredYear={filteredYear} sortedList={sortedList} onMovieClick={handleMovieClick}/>
+            <ListMovies
+              filteredYear={filteredYear}
+              filteredGenre={filteredGenre} // Pass the filtered genre
+              sortedList={sortedList}
+              onMovieClick={handleMovieClick}
+            />
 
         </div>
-
         </main>
     </div>
   );

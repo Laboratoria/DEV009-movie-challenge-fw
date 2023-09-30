@@ -26,7 +26,9 @@ const ListMovies = ({ sortedList, filteredYear }) => {
               className="movie-poster"
             />
             <p className="movie-title">{movie.title}</p>
-            <p className="movie-score">{'Score:' + movie.vote_average}</p>
+            <p className="release-year">
+              Release Year: {movie.release_date ? movie.release_date.split('-')[0] : 'N/A'}
+            </p>
           </div>
         </Link>
       ))}
