@@ -24,6 +24,9 @@
       "react-app/jest"
     ]
   },
+  "jest": {
+    "preset": "react-scripts"
+  },
   "browserslist": {
     "production": [
       ">0.2%",
@@ -39,4 +42,5 @@
   "devDependencies": {
     "react-router-dom": "^6.16.0"
   }
+  
 }
