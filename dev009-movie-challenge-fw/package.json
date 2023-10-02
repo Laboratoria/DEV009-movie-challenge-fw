@@ -24,9 +24,6 @@
       "react-app/jest"
     ]
   },
-  "jest": {
-    "preset": "react-scripts"
-  },
   "browserslist": {
     "production": [
       ">0.2%",

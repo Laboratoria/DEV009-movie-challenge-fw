@@ -3,8 +3,7 @@ import React, { useState, useEffect } from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { useParams } from 'react-router-dom';
 import { getOne } from '../utils/api/moviesRepository';
-
-
+import { Link } from 'react-router-dom';
 
 const MovieDetail = ({genres}) => {
   const [selectedMovie, setSelectedMovie] = useState({});
@@ -21,56 +20,64 @@ const MovieDetail = ({genres}) => {
       });
   }, [movieId]);
 
+
   return (
-    <div>
-    <div className="movie-detail">
-      <button className="custom-button">Watch now</button>
-    
-    <div className="container mt-5">
-      <h1 className="movie-title">{selectedMovie.title}</h1>
-      <img
-          src={`https://image.tmdb.org/t/p/w200${selectedMovie.poster_path}`}
-          alt={selectedMovie.title}
-          className="movie-poster"
-      />
-      <p className="release-year">
-        Release Year: {selectedMovie.release_date ? selectedMovie.release_date.split('-')[0] : 'N/A'}
-      </p>
+    <main>
+      <div className="movie-detail">
+      <aside>
+      <Link to="/">
+        <button className="custom-button">Back to movie list</button>
+      </Link>
 
-      <p className="movie-overview">{selectedMovie.overview}</p>
-      <p className="movie-score">{'Score:' + selectedMovie.vote_average}</p>
-      <div className="production-companies">
-        {selectedMovie.production_companies ? (
-          selectedMovie.production_companies.map((company) => (
-            <img
-              key={company.id}
-              src={`https://image.tmdb.org/t/p/w200${company.logo_path}`}
-              alt={company.name}
-              className="production-company-logo"
-            />
-          ))
-        ) : (
-          <p>No production companies available</p>
-        )}
-      </div>
-      <div className="movie-genres">
-        <h3>Genres:</h3>
-        <ul>
-          {selectedMovie.genre_ids?.map((genreId) => (
-            
-            <li key={genreId}>
-              
-              {genres.find((genre) => genre.id === genreId)?.name}
-              
-            </li>
-          ))}
-        </ul>
-      </div>
+        <div className="container mt-5">
+          <h1 className="movie-title">{selectedMovie.title}</h1>
+          <img
+            src={`https://image.tmdb.org/t/p/w200${selectedMovie.poster_path}`}
+            alt={selectedMovie.title}
+            className="movie-poster"
+        />
+        </div>
+      </aside>
+      
+        <div className="MovieCaptions">
+          <p className="release-year">
+            Release Year: {selectedMovie.release_date ? selectedMovie.release_date.split('-')[0] : 'N/A'}
+          </p>
 
+          <h4>Overview:</h4>
+          <p className="movie-overview">{selectedMovie.overview}</p>
+          <p className="movie-score">{'Score:' + selectedMovie.vote_average}</p>
+
+          <div className="movie-genres">
+            <h4>Genres:</h4>
+            <ul>
+              {selectedMovie.genres && selectedMovie.genres.map((genre) => (
+                <li key={genre.id}>
+                  {genre.name}
+                </li>
+              ))}
+            </ul>
+          </div>
+
+          <div className="production-companies">
+            {selectedMovie.production_companies ? (
+              selectedMovie.production_companies.map((company) => (
+                <img
+                  key={company.id}
+                  src={`https://image.tmdb.org/t/p/w200${company.logo_path}`}
+                  alt={company.name}
+                  className="production-company-logo"
+                />
+              ))
+            ) : (
+              <p>No production companies available</p>
+            )}
+          </div>
+        </div>
       </div>
-    </div>
-    </div>
-  );
+  
+  </main>
+);
 };
 
 export default MovieDetail;

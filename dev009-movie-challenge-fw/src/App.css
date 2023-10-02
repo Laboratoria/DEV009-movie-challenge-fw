@@ -154,3 +154,13 @@ main{
   font-size: 24px;
   font-weight: bold;
 }
+aside {
+  position: relative;
+  float: left; /* Para alinear a la derecha */
+  width: 300px; /* Ancho deseado */
+  /* Agrega otros estilos según tus necesidades */
+}
+
+.MovieCaptions{
+  padding: 10px;
+}

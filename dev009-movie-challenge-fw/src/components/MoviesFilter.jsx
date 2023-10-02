@@ -27,7 +27,7 @@ const MovieFilter = ({ movies, onYearFilterChange, onGenreFilterChange, filtered
         console.error('Error getting genres:', error);
       });
   }, []);
-
+  
   const handleYearChange = (e) => {
     setSelectedYear(e.target.value);
   };
