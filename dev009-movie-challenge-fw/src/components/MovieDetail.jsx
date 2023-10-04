@@ -23,8 +23,9 @@ const MovieDetail = ({genres}) => {
 
   return (
     <main>
+      <div className="movie-card-detail">
       <div className="movie-detail">
-      <aside>
+
       <Link to="/">
         <button className="custom-button">Back to movie list</button>
       </Link>
@@ -34,10 +35,10 @@ const MovieDetail = ({genres}) => {
           <img
             src={`https://image.tmdb.org/t/p/w200${selectedMovie.poster_path}`}
             alt={selectedMovie.title}
-            className="movie-poster"
+            className="movie-poster-detail"
         />
         </div>
-      </aside>
+      </div>
       
         <div className="MovieCaptions">
           <p className="release-year">
@@ -74,8 +75,8 @@ const MovieDetail = ({genres}) => {
             )}
           </div>
         </div>
-      </div>
-  
+
+        </div>
   </main>
 );
 };

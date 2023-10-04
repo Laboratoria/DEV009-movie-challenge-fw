@@ -1,45 +1,53 @@
-import React, { useState, useMemo } from 'react';
+import React, { useState, useMemo, useEffect } from 'react';
 import './App.css';
-import { BrowserRouter as Router ,Route,Routes, Link } from 'react-router-dom';
-import MoviesRepository from './utils/api/moviesRepository';
+import { MoviesList } from './utils/api/moviesRepository'; // Import the necessary function
 import Header from './components/Header';
 import ListMovies from './components/ListMovies';
 import OrderBy from './components/OrderBy';
 import MovieFilter from './components/MoviesFilter';
 import MovieDetail from './components/MovieDetail';
+import Paginacion from './components/Paginacion';
 
 const MovieAdmin = () => {
+  // Desestructuración de objetos
+  const { movies, currentPage, setCurrentPage } = MoviesList();
+  // Estado
   const [list, setList] = useState([]);
-  const [selectedSortOption, setSelectedSortOption] = useState('title-asc');
+  const [selectedSortOption, setSelectedSortOption] = useState('all');
   const [filteredYear, setFilteredYear] = useState('all');
   const [selectedMovie, setSelectedMovie] = useState(null);
-  const [filteredGenre, setFilteredGenre] = useState('all'); 
-  
+  const [filteredGenre, setFilteredGenre] = useState('all');
+  const itemsPerPage = 20; // Número de películas por página
+
+  // Funciones de manejo de eventos
   const handleYearFilterChange = (year) => {
     setFilteredYear(year);
   };
+
   const handleGenreFilterChange = (genre) => {
     setFilteredGenre(genre);
-  };
-
-  const handleMoviesFetched = (movies) => {
-    setList(movies);
   };
 
   const handleSortOptionChange = (event) => {
     setSelectedSortOption(event.target.value);
   };
 
- const handleMovieClick = (movieId) => {
+  const handleMovieClick = (movieId) => {
     setSelectedMovie(movieId);
   };
-
+  useEffect(() => {
+    if (movies) {
+      // Assuming movies is an array of movie objects
+      setList(movies);
+    }
+  }, [movies]);
+  
   const sortedList = useMemo(() => {
     const [sortField, sortOrder] = selectedSortOption.split('-');
     
     // Clone the list to avoid modifying the state directly
     const nextList = [...list];
-
+  
     // Apply the sorting logic
     nextList.sort((a, b) => {
       if (sortField === 'title') {
@@ -49,9 +57,12 @@ const MovieAdmin = () => {
       }
       return 0;
     });
-
+  
+    console.log("Sorted List:", nextList); // Add this line
+  
     return nextList;
   }, [list, selectedSortOption]);
+    
 
   return (
     <div>
@@ -85,17 +96,37 @@ const MovieAdmin = () => {
               filteredGenre={filteredGenre}
             />
 
-              <OrderBy selectedSortOption={selectedSortOption} handleSortOptionChange={handleSortOptionChange} />
+            <OrderBy 
+              selectedSortOption={selectedSortOption} 
+              handleSortOptionChange={handleSortOptionChange} 
+              />
             </div>
           </div>
 
+      
+
           <div className="movies">
-            <MoviesRepository moviesFetched={handleMoviesFetched} /> 
-            <ListMovies
-              filteredYear={filteredYear}
-              filteredGenre={filteredGenre} // Pass the filtered genre
-              sortedList={sortedList}
-              onMovieClick={handleMovieClick}
+
+          <Paginacion
+              currentPage={currentPage}
+              totalPages={movies.total_pages}
+              onPageChange={(newPage) => setCurrentPage(newPage)}
+            />
+            
+          <ListMovies
+            movies={movies} // Pass the movies prop here
+            filteredYear={filteredYear}
+            filteredGenre={filteredGenre}
+            sortedList={sortedList}
+            onMovieClick={handleMovieClick}
+          />
+
+
+
+            <Paginacion
+              currentPage={currentPage}
+              totalPages={movies.total_pages}
+              onPageChange={(newPage) => setCurrentPage(newPage)}
             />
 
         </div>

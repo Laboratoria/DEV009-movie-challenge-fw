@@ -113,13 +113,14 @@ nav ul li a {
   align-items: center;
   font-family: var(--font-family-main-text);
 }
-main{
-  display:flex;
+main {
+  display: flex;
   background-color: var(--container-color);
   padding: 20px;
-  gap:15px;
+  gap: 15px;
   font-family: var(--font-family-main-text);
 }
+
 
 @media (max-width: 768px) {
   .logo {
@@ -143,9 +144,7 @@ main{
   font-family: var(--font-family-main-text);
   background-color: var(--container-color);
 }
-.mt-5{
-  padding-left:125px;
-}
+
 .custom-button {
   background-color:#4FC34D;
   color:#fcfcfc;
@@ -154,13 +153,34 @@ main{
   font-size: 24px;
   font-weight: bold;
 }
-aside {
-  position: relative;
-  float: left; /* Para alinear a la derecha */
-  width: 300px; /* Ancho deseado */
-  /* Agrega otros estilos según tus necesidades */
+.production-company-logo {
+  width: 100px; 
+  height: auto;
+  margin-right: 1vh;
+}
+.movie-poster-detail{
+  border-radius: 2vh;
+  width:280px;
+  padding:5vh;
 }
 
 .MovieCaptions{
-  padding: 10px;
+  align-self: center;
+}
+.movie-detail{
+  align-self: center;
+}
+.movie-card-detail {
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  display: flex;
+  background-color: var(--container-color);
+  padding: 20px;
+  gap: 15px;
+  font-family: var(--font-family-main-text);
+  width: 100%;
+  height: 100%;
 }

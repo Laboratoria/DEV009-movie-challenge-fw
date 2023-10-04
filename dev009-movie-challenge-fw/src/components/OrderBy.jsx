@@ -1,4 +1,3 @@
-// orderBy.jsx
 import React from 'react';
 
 const OrderBy = ({ selectedSortOption, handleSortOptionChange }) => {
@@ -12,8 +11,8 @@ const OrderBy = ({ selectedSortOption, handleSortOptionChange }) => {
         onChange={handleSortOptionChange}
       >
         <option value="All">All</option>
-        <option value="title-asc">A - Z</option>
-        <option value="title-desc">Z - A</option>
+        <option value="title-asc">Ascendente</option>
+        <option value="title-desc">Descendente</option>
         <option value="vote_average-asc">Score Low - High</option>
         <option value="vote_average-desc">Score High - Low</option>
       </select>

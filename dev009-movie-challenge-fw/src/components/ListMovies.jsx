@@ -1,25 +1,37 @@
 import React, { useMemo } from 'react';
 import { Link } from 'react-router-dom';
 
-const ListMovies = ({ sortedList, filteredYear, filteredGenre }) => {
+
+const ListMovies = ({ movies, sortedList, filteredYear, filteredGenre }) => {
   const filteredAndSortedMovies = useMemo(() => {
-    let filteredMovies = sortedList;
+    if (!movies) {
+      // Si 'movies' es undefined o null, retorna un arreglo vacío
+      return [];
+    }
+
+    let filteredMovies = sortedList; // Use the sortedList prop for sorting
 
     if (filteredYear !== 'all') {
-      filteredMovies = sortedList.filter((movie) => {
+      // Filter based on the original 'movies' prop
+      filteredMovies = movies.filter((movie) => {
         return movie.release_date.split('-')[0] === filteredYear;
       });
     }
 
     // Filtrar por género
     if (filteredGenre !== 'all') {
-      filteredMovies = filteredMovies.filter((movie) =>
-        movie.genre_ids.includes(parseInt(filteredGenre))
-      );
+      // Filter based on the original 'movies' prop
+      filteredMovies = filteredMovies.filter((movie) => {
+        // Check if movie is defined and has 'genre_ids' property
+        if (movie && movie.genre_ids) {
+          return movie.genre_ids.includes(parseInt(filteredGenre));
+        }
+        return false; // Return false if 'movie' is undefined or has no 'genre_ids'
+      });
     }
 
     return filteredMovies;
-  }, [sortedList, filteredYear, filteredGenre]);
+  }, [movies, sortedList, filteredYear, filteredGenre]);
 
   return (
     <div className="movies-grid">

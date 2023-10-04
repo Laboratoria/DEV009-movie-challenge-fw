@@ -16,3 +16,18 @@ Se pudo consumir la API,extrayendo la imagen, titulo, año y score.
 ### Removed
 
 Se eliminó la función de filtrar por director.
+
+## 1.1.1 - 2023-10-04
+
+### Sprint learnings
+
+Aprendí mas sobre hooks, (useMemo, useEffect) y consumo de API en  moviesRepository.jsx
+### Added
+
+Se agregó la vista de peliculas por paginación. se agrego el filtro por generos.Se agregó el componente Paginación. Se agregó el consumo de API(getOne,getGenres).
+
+
+### Fixed
+
+Se pudo consumir la API,extrayendo el genero, compañias productoras.Se adapto el proyecto al nuevo README de movie challenge
+

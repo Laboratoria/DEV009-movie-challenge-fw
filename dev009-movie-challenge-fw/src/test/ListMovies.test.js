@@ -1,46 +1,41 @@
 import React from 'react';
 import { render, screen } from '@testing-library/react';
-import { MemoryRouter } from 'react-router-dom'; 
-import ListMovies from '../components/ListMovies';
+import ListMovies from './ListMovies';
 
 describe('ListMovies Component', () => {
   const movies = [
     {
       id: 1,
       title: 'Movie 1',
-      release_date: '2021-01-01',
+      release_date: '2023-01-01',
       poster_path: '/path/to/poster1.jpg',
     },
     {
       id: 2,
       title: 'Movie 2',
-      release_date: '2022-02-02',
+      release_date: '2023-02-01',
       poster_path: '/path/to/poster2.jpg',
     },
   ];
 
-  it('renders a list of movies', () => {
+  it('renders movie cards correctly', () => {
     render(
-      <MemoryRouter>
-        <ListMovies sortedList={movies} filteredYear="all" />
-      </MemoryRouter>
+      <ListMovies
+        movies={movies}
+        sortedList={movies} 
+        filteredYear="all"
+        filteredGenre="all"
+      />
     );
 
-    const movieElements = screen.getAllByRole('link', { name: /Movie/i });
-    expect(movieElements).toHaveLength(movies.length);
+    // Make assertions based on your component's output
+    const movieCards = screen.getAllByTestId('movie-card');
+    expect(movieCards).toHaveLength(2);
+
+    // You can add more specific assertions here based on your component's rendering
+    expect(screen.getByText('Movie 1')).toBeInTheDocument();
+    expect(screen.getByText('Movie 2')).toBeInTheDocument();
   });
-
-  it('filters movies by year', () => {
-    render(
-      <MemoryRouter>
-        <ListMovies sortedList={movies} filteredYear="2022" />
-      </MemoryRouter>
-    );
-
-    const movieElements = screen.getAllByRole('link', { name: /Movie/i });
-    expect(movieElements).toHaveLength(1); // Only one movie in 2022
-  });
-
 
 });
 

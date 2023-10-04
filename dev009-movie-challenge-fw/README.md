@@ -1,70 +1,64 @@
-# Getting Started with Create React App
+# Social Networks AREQUIPA 360
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+## Índice
 
-## Available Scripts
+* [1. Preámbulo](#1-preámbulo)
+* [2. Resumen del proyecto](#2-resumen-del-proyecto)
+* [3. Herramientas](#3-herramientas)
+* [4. Historias de usuario](#4-historias-de-usuario)
+* [5. Prototipos](#5-prototipos)
+* [6. Planificación del proyecto](#6-planificacion-del-proyecto)
+* [7. Resultado](#7-resultado)
+***
 
-In the project directory, you can run:
+## 1. Preámbulo
 
-### `npm start`
+El objetivo del proyecto fue crear una  página web destinada a visualizar, filtrar y ordenar el catálogo de películas de The Movie Database API V3. Esta página puede servir como un catálogo de películas general, diseñada para la comunidad de viajeros cinefilos. En busqueda de una pelicula para compartir en comunidad desde donde se encuentren. 
+## 2. Resumen del proyecto
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+La tematica elegida fue pensada para resolver el reto a la hora de elegir una pelicula.
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+1.- Los principlaes usuarios del producto son personas que estan viajando constantemente y que al ingresar puedan ver las mejor votada sor la misma comunidad qu ecomparte su pasión por viajar y conocer el mundo.
 
-### `npm test`
+2.- Los objetivos de los usuarios en relacion con el producto son visualizar, filtrar y ordenar el catálogo de películas.
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+## 3. Herramientas
 
-### `npm run build`
+Los lenguajes utilizados fueron HTML semántico, CSS y JavaScript, se uso React. Se crearon e implementaron test unitarios de componentes mayor al 90%
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+## 4. Historias de Usuario
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+#### Historia de usabilidad 1
+![user story 1](src/components//img/7.jpg)
+#### Historia de usabilidad 2
+![user story 2](src/components//img/8.jpg)
+#### Historia de usabilidad 3
+![user story 3](src/components//img/9.jpg)
+#### Historia de usabilidad 4
+![user story 4](src/components//img/10.jpg)
+## 5. Prototipos
+Se trabajo en la elaboración de un prototipo a papel ,luego uno de alta fidelidad el cual fue evaluado por nuestras compañeras de las cuales recibi feedback para posteriormente y después de aplicar las sugerencias , volver a solicitarles ayuda en el test de usabilidad.
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+#### Prototipos de alta fidelidad
+![prototipo alta 1](src/components/img/prototipo-alta.png)
 
-### `npm run eject`
+ Prototipo dinámico: [prototipo dinamico](https://www.figma.com/proto/vvNUtz6OP1hfzPwJ7nNjHw/Untitled?type=design&node-id=1-136&t=stdBuyPXIzTgPZDp-1&scaling=scale-down&page-id=0%3A1&starting-point-node-id=1%3A136&show-proto-sidebar=1&mode=design)
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+#### Listado de problemas de usabilidad detectados 
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+Hice un test de usabilidad recibiendo como feedback los siguiente.
+![feedback](src/components/img/test-usabilidad-a.png)
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+Use para el diseño de ambos protipos [Figma](https://www.figma.com/) 
+### Pruebas unitarias
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+El proyecto cuenta con test para las funciones encargadas de  crear, editar, borrar publicaciones. Asi como mantener al usuario logueado, salir sesión.
 
-## Learn More
+## 6. Planificación del proyecto
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+Me planifiqué en Git Hub projects, este me ayudo a optimizar mi proceso y hacerle seguimiento a mi avance diario.
+![plicificacion 1](src/components/img/planificacion-1.png)
+![planificacion 2](src/components/img/planificacion-2.png)
+## 7. Resultado
+![result 1](src/components/img/resultado.png)
+![result 2](src/components/img/resultado-2.png)

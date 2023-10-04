@@ -1,23 +1,19 @@
 import { useEffect, useState } from 'react';
 
-const MoviesRepository = ({ moviesFetched }) => {
+export const MoviesList = () => {
   const [list, setList] = useState([]);
   const [movieIds, setMovieIds] = useState([]);
+  const [movies, setMovies] = useState([]);
+  const [currentPage, setCurrentPage] = useState(1);
+
 
   useEffect(() => {
-    fetch('https://api.themoviedb.org/3/discover/movie?api_key=ce209e5ff09d9bb827b2cd4025cd595c')
+    fetch(`https://api.themoviedb.org/3/discover/movie?api_key=ce209e5ff09d9bb827b2cd4025cd595c&page=${currentPage}`)
       .then(response => response.json())
       .then(responseData => {
         if (responseData && responseData.results) {
-          const movies = responseData.results;
-          setList(movies);
-          
-          // Extract movie IDs into an array
-          const ids = movies.map(movie => movie.id);
-          setMovieIds(ids);
-          console.log(movieIds); // Check the value of movieIds
-
-          moviesFetched(movies, ids); // Pass both movies and movieIds to the function provided by App.jsx
+          const moviesData = responseData.results;
+          setMovies(moviesData);
         } else {
           console.error('La respuesta de la API está vacía o no es válida.');
         }
@@ -25,10 +21,13 @@ const MoviesRepository = ({ moviesFetched }) => {
       .catch(err => {
         console.error(err.message);
       });
-  },  [moviesFetched, movieIds]);
+  }, [currentPage]);
 
-  return null; // No es necesario representar nada en este componente
+  return {
+    movies, currentPage, setCurrentPage
+  };
 };
+
 
 export const getOne = (movieId) => {
   return fetch(`https://api.themoviedb.org/3/movie/${movieId}?api_key=ce209e5ff09d9bb827b2cd4025cd595c`)
@@ -60,4 +59,3 @@ export const getGenre = (movieId) => {
     .catch(err => console.error(err));
 };
 
-export default MoviesRepository;
