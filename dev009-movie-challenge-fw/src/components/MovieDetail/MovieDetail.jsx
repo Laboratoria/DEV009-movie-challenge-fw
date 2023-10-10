@@ -1,8 +1,9 @@
 // MovieDetail.jsx
 import React, { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
-import { getOne } from '../utils/api/moviesRepository';
+import { getOne } from '../../utils/api/moviesRepository';
 import { Link } from 'react-router-dom';
+import './MovieDetail.css'
 
 const MovieDetail = ({genres}) => {
   const [selectedMovie, setSelectedMovie] = useState({});

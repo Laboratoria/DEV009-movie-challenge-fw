@@ -2,7 +2,7 @@ import React from 'react';
 import '@testing-library/jest-dom/extend-expect'; 
 import { render, screen } from '@testing-library/react';
 import { MemoryRouter, Route, Routes} from 'react-router-dom'; 
-import MovieDetail from '../components/MovieDetail'; 
+import MovieDetail from './MovieDetail';
 
 
 jest.mock('react-router-dom', () => ({
@@ -28,7 +28,7 @@ describe('MovieDetail Component', () => {
     };
 
     // Mock the API call with the movieData
-    jest.spyOn(require('../utils/api/moviesRepository'), 'getOne').mockResolvedValue(movieData);
+    jest.spyOn(require('../../utils/api/moviesRepository'), 'getOne').mockResolvedValue(movieData);
 
     render(
     <MemoryRouter initialEntries={['/movie/1']}>

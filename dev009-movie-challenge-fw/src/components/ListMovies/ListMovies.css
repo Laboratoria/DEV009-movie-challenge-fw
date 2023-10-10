@@ -1,0 +1,30 @@
+.movies-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr); /* Grid de tres columnas */
+    gap: 20px; /* Espacio entre elementos */
+  }
+  
+  .movie-card {
+    border: 1px solid #ccc;
+    background-color: var(--container-color);
+    padding: 10px;
+    text-align: center;
+    border-radius: 2vh;
+  
+  }
+  
+  .movie-poster {
+    max-width: 100%;
+    height: auto;
+  }
+  .release-year{
+    text-decoration-color: black;
+  }
+  .movie-title {
+    margin-top: 10px;
+    font-size: 16px;
+  }
+  
+  .movie-poster{
+    border-radius: 2vh;
+  }

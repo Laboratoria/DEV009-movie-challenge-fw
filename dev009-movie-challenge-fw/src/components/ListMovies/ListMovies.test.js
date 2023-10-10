@@ -2,7 +2,7 @@ import React from 'react';
 import '@testing-library/jest-dom/extend-expect';
 import { render, screen } from '@testing-library/react';
 import { MemoryRouter } from 'react-router-dom';
-import ListMovies from '../components/ListMovies';
+import ListMovies from './ListMovies';
 
 describe('ListMovies Component', () => {
   it('renders movie titles and release years correctly', () => {

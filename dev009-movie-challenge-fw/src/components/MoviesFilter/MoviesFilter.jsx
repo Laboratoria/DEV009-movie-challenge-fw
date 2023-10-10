@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
-import { getGenre } from '../utils/api/moviesRepository';
-import { MoviesList } from '../utils/api/moviesRepository';
+import { getGenre } from '../../utils/api/moviesRepository';
+import { MoviesList } from '../../utils/api/moviesRepository';
 
 const MovieFilter = ({ onYearFilterChange, onGenreFilterChange, filteredYear, filteredGenre }) => {
   const { movies } = MoviesList();

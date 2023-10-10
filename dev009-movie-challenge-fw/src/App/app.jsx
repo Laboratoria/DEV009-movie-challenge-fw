@@ -1,11 +1,11 @@
 import React, { useState, useMemo, useEffect } from 'react';
 import './App.css';
-import { MoviesList, searchMovie } from '../utils/api/moviesRepository'; // Import the necessary function
-import Header from '../components/Header';
-import ListMovies from '../components/ListMovies';
-import OrderBy from '../components/OrderBy';
-import MovieFilter from '../components/MoviesFilter';
-import MovieDetail from '../components/MovieDetail';
+import { MoviesList, searchMovie } from '../utils/api/moviesRepository'; 
+import Header from '../components/header/Header';
+import ListMovies from '../components/ListMovies/ListMovies';
+import OrderBy from '../components/OrderBy/OrderBy';
+import MovieFilter from '../components/MoviesFilter/MoviesFilter';
+import MovieDetail from '../components/MovieDetail/MovieDetail';
 import Paginacion from '../components/Paginacion';
 
 const MovieAdmin = () => {

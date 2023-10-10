@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
-import Header from '../components/Header';
-import ListMovies from '../components/ListMovies';
-import MovieDetail from '../components/MovieDetail';
+import Header from '../components/header/Header';
+import ListMovies from '../components/ListMovies/ListMovies';
+import MovieDetail from '../components/MovieDetail/MovieDetail';
 import MoviesRepository from '../utils/api/moviesRepository'; // Import the data fetching component
 import MovieAdmin from '../App/App';
 
