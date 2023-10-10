@@ -1,8 +1,6 @@
 import { useEffect, useState } from 'react';
 
 export const MoviesList = () => {
-  const [list, setList] = useState([]);
-  const [movieIds, setMovieIds] = useState([]);
   const [movies, setMovies] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
 
@@ -59,3 +57,18 @@ export const getGenre = (movieId) => {
     .catch(err => console.error(err));
 };
 
+export const searchMovie = () => {
+
+    const options = {
+      method: 'GET',
+      headers: {
+        accept: 'application/json',
+        Authorization: 'Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiJjZTIwOWU1ZmYwOWQ5YmI4MjdiMmNkNDAyNWNkNTk1YyIsInN1YiI6IjY1MGE2MGE0ZDZjMzAwMDBjY2EwZjZjYSIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.wlDc2oGZoiPKCJY1QUu-CCVAnCHRNQ5AkwBMPwnwiBY',
+      },
+    };
+
+    fetch('https://api.themoviedb.org/3/keyword/movie?api_key=ce209e5ff09d9bb827b2cd4025cd595c', options)
+      .then((response) => response.json())
+      .then((data) => console.log(data))
+      .catch((err) => console.error(err));
+};

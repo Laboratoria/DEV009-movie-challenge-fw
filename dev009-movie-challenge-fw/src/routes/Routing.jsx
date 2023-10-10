@@ -4,7 +4,7 @@ import Header from '../components/Header';
 import ListMovies from '../components/ListMovies';
 import MovieDetail from '../components/MovieDetail';
 import MoviesRepository from '../utils/api/moviesRepository'; // Import the data fetching component
-import MovieAdmin from '../App';
+import MovieAdmin from '../App/App';
 
 function App() {
   return (

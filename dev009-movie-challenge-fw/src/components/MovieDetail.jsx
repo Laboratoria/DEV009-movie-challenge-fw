@@ -1,6 +1,5 @@
 // MovieDetail.jsx
 import React, { useState, useEffect } from 'react';
-import 'bootstrap/dist/css/bootstrap.min.css';
 import { useParams } from 'react-router-dom';
 import { getOne } from '../utils/api/moviesRepository';
 import { Link } from 'react-router-dom';
@@ -10,7 +9,7 @@ const MovieDetail = ({genres}) => {
   const { movieId } = useParams(); // Obtiene el movieId de los parámetros de la URL
 
   useEffect(() => {
-    // Llama a la función getOne con el movieId
+    // Llamo  a la función getOne con el movieId que obtuve
     getOne(movieId)
       .then((movieData) => {
         setSelectedMovie(movieData);

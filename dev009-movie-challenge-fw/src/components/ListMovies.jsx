@@ -4,10 +4,7 @@ import { Link } from 'react-router-dom';
 
 const ListMovies = ({ movies, sortedList, filteredYear, filteredGenre }) => {
   const filteredAndSortedMovies = useMemo(() => {
-    if (!movies) {
-      // Si 'movies' es undefined o null, retorna un arreglo vacío
-      return [];
-    }
+  console.log(sortedList)
 
     let filteredMovies = sortedList; // Use the sortedList prop for sorting
 
@@ -40,7 +37,7 @@ const ListMovies = ({ movies, sortedList, filteredYear, filteredGenre }) => {
           <div className="movie-card">
             <img
               src={`https://image.tmdb.org/t/p/w200${movie.poster_path}`}
-              alt={movie.title}
+              alt={movie.poster}
               className="movie-poster"
             />
             <p className="movie-title">{movie.title}</p>
