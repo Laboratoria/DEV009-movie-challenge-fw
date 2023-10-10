@@ -1,117 +1,65 @@
 import React from 'react';
-import '@testing-library/jest-dom/extend-expect';
-import { render, screen, waitFor } from '@testing-library/react';
+import { render, fireEvent } from '@testing-library/react';
 import MovieFilter from './MoviesFilter';
-import { getGenre } from '../../utils/api/moviesRepository';
 
+// Mock del módulo moviesRepository
+import * as moviesRepository from '../../utils/Services/moviesRepository';
 
-// Importa jest-fetch-mock
-import fetchMock from 'jest-fetch-mock';
+// Mock de la función getMovies
+jest.mock('../../utils/Services/moviesRepository', () => ({
+  getMovies: jest.fn(),
+}));
 
-// Configura jest-fetch-mock
-fetchMock.enableMocks();
+const mockYearFilterChange = jest.fn();
+const mockGenreFilterChange = jest.fn();
 
-const MovieData = [
-  {
-    "adult": false,
-    "backdrop_path": "/cHNqobjzfLj88lpIYqkZpecwQEC.jpg",
-    "genre_ids": [1],
-    "id": 926393,
-    "original_language": "en",
-    "original_title": "The Equalizer 3",
-    "overview": "Robert McCall finds himself at home in Southern Italy but he discovers his friends are under the control of local crime bosses. As events turn deadly, McCall knows what he has to do: become his friends' protector by taking on the mafia.",
-    "popularity": 3761.779,
-    "poster_path": "/b0Ej6fnXAP8fK75hlyi2jKqdhHz.jpg",
-    "release_date": "2023-08-30",
-    "title": "The Equalizer 3",
-    "video": false,
-    "vote_average": 7.4,
-    "vote_count": 612
-  },
-  {
-    "adult": false,
-    "backdrop_path": "/pA3vdhadJPxF5GA1uo8OPTiNQDT.jpg",
-    "genre_ids": [2],
-    "id": 678512,
-    "original_language": "en",
-    "original_title": "Sound of Freedom",
-    "overview": "The story of Tim Ballard, a former US government agent, who quits his job in order to devote his life to rescuing children from global sex traffickers.",
-    "popularity": 2724.044,
-    "poster_path": "/qA5kPYZA7FkVvqcEfJRoOy4kpHg.jpg",
-    "release_date": "2023-07-03",
-    "title": "Sound of Freedom",
-    "video": false,
-    "vote_average": 8.1,
-    "vote_count": 754
-  }
-];
+const setup = () => {
+  const utils = render(
+    <MovieFilter
+      onYearFilterChange={mockYearFilterChange}
+      onGenreFilterChange={mockGenreFilterChange}
+      filteredYear="all"
+      filteredGenre="all"
+    />
+  );
+  return utils;
+};
 
+describe('MovieFilter', () => {
+  it('should render the component', () => {
+    // Configura el mock de getMovies para devolver datos ficticios
+    moviesRepository.getMovies.mockResolvedValue([{ title: 'Movie 1' }, { title: 'Movie 2' }]);
 
-it.only('MovieFilter Component', () => {
-  // Mock de la función getGenre
-  const mockGetGenre = jest.fn();
+    const { getByText } = setup();
 
-  beforeEach(() => {
-    // Limpia el mock antes de cada prueba
-    fetchMock.mockClear();
+    // Verifica que el componente se renderice correctamente
+    expect(getByText('FILTER BY YEAR')).toBeInTheDocument();
+    expect(getByText('FILTER BY GENRE')).toBeInTheDocument();
   });
 
-  /*it('renders year filter correctly', async () => {
-    // Simula una respuesta de getGenre
-    mockGetGenre.mockResolvedValue({
-      genres: [
-        { id: 1, name: 'Genre 1' },
-        { id: 2, name: 'Genre 2' },
-      ],
-    });
-  
-    // Renderiza el componente MovieFilter
-    render(
-      <MovieFilter
-        onYearFilterChange={() => {}}
-        onGenreFilterChange={() => {}}
-        filteredYear="2022"
-        filteredGenre="all"
-      />
-    );
-  
-    expect(screen.getByText('FILTER BY YEAR')).toBeInTheDocument();
-    expect(screen.getByDisplayValue('2022')).toBeInTheDocument();
-  
-    // Espera a que se resuelva la llamada a getGenre
-    await waitFor(() => {
-      expect(mockGetGenre).toHaveBeenCalledTimes(1);
-    });
-  });*/
-  
+  it('should handle year change', () => {
+    // Configura el mock de getMovies para devolver datos ficticios
+    moviesRepository.getMovies.mockResolvedValue([{ title: 'Movie 1' }, { title: 'Movie 2' }]);
 
-  it('renders genre filter correctly', async () => {
-    mockGetGenre.mockResolvedValue({
-      genres: [
-        { id: 1, name: 'Genre 1' },
-        { id: 2, name: 'Genre 2' },
-      ],
-    });
+    const { getByTitle } = setup();
 
-    // Renderiza el componente MovieFilter
-    render(
-      <MovieFilter
-        onYearFilterChange={() => {}}
-        onGenreFilterChange={() => {}}
-        filteredYear="all"
-        filteredGenre={1}
-        movies={MovieData} 
-      />
-    );
-    
+    const yearFilter = getByTitle('Dropdown filtro por año');
+    fireEvent.change(yearFilter, { target: { value: '2022' } });
 
-    // Verifica que el componente renderice el filtro de género y muestre el valor seleccionado
-    expect(screen.getByText('FILTER BY GENRE')).toBeInTheDocument();
-    expect(screen.getByDisplayValue('1')).toBeInTheDocument();
+    // Verifica que la función de cambio de año se llame con el valor correcto
+    expect(mockYearFilterChange).toHaveBeenCalledWith('2022');
+  });
 
-    // Espera a que se resuelva la llamada a getGenre
-    await waitFor(() => {
-      expect(mockGetGenre).toHaveBeenCalledTimes(1);
-    });
+  it('should handle genre change', () => {
+    // Configura el mock de getMovies para devolver datos ficticios
+    moviesRepository.getMovies.mockResolvedValue([{ title: 'Movie 1' }, { title: 'Movie 2' }]);
+
+    const { getByTitle } = setup();
+
+    const genreFilter = getByTitle('Dropdown filtro por género');
+    fireEvent.change(genreFilter, { target: { value: '1' } });
+
+    // Verifica que la función de cambio de género se llame con el valor correcto
+    expect(mockGenreFilterChange).toHaveBeenCalledWith('1');
   });
 });

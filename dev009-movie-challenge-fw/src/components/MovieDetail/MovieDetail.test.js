@@ -28,7 +28,7 @@ describe('MovieDetail Component', () => {
     };
 
     // Mock the API call with the movieData
-    jest.spyOn(require('../../utils/api/moviesRepository'), 'getOne').mockResolvedValue(movieData);
+    jest.spyOn(require('../../utils/Services/moviesRepository'), 'getOne').mockResolvedValue(movieData);
 
     render(
     <MemoryRouter initialEntries={['/movie/1']}>

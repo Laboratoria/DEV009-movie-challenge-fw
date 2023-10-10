@@ -3,8 +3,8 @@ import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import Header from '../components/header/Header';
 import ListMovies from '../components/ListMovies/ListMovies';
 import MovieDetail from '../components/MovieDetail/MovieDetail';
-import MoviesRepository from '../utils/api/moviesRepository'; // Import the data fetching component
-import MovieAdmin from '../App/App';
+import MoviesRepository from '../utils/Services/moviesRepository'; // Import the data fetching component
+import MovieAdmin from '../components/App/App';
 
 function App() {
   return (

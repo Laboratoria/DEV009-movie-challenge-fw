@@ -1,12 +1,12 @@
 import React, { useState, useMemo, useEffect } from 'react';
 import './App.css';
-import { MoviesList, searchMovie } from '../utils/api/moviesRepository'; 
-import Header from '../components/header/Header';
-import ListMovies from '../components/ListMovies/ListMovies';
-import OrderBy from '../components/OrderBy/OrderBy';
-import MovieFilter from '../components/MoviesFilter/MoviesFilter';
-import MovieDetail from '../components/MovieDetail/MovieDetail';
-import Paginacion from '../components/Paginacion';
+import { MoviesList, searchMovie } from '../../utils/Services/moviesRepository'; 
+import Header from '../header/Header';
+import ListMovies from '../ListMovies/ListMovies';
+import OrderBy from '../OrderBy/OrderBy';
+import MovieFilter from '../MoviesFilter/MoviesFilter';
+import MovieDetail from '..//MovieDetail/MovieDetail';
+import Paginacion from '../Paginacion/Paginacion';
 
 const MovieAdmin = () => {
   // Desestructuración de objetos
@@ -80,7 +80,7 @@ const MovieAdmin = () => {
         </div>
         <div>
           <img
-            src={require('../assets/img/logo.png')}
+            src={require('../../assets/img/logo.png')}
             alt="Logo de mi sitio web"
             className="logo"
           />

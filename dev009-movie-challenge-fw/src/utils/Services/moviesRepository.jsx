@@ -6,7 +6,15 @@ export const MoviesList = () => {
 
 
   useEffect(() => {
-    fetch(`https://api.themoviedb.org/3/discover/movie?api_key=ce209e5ff09d9bb827b2cd4025cd595c&page=${currentPage}`)
+    // Cuando cambia la página actual, llamamos a getMovies
+    getMovies(currentPage);
+  }, [currentPage]);
+
+  // Función para obtener películas desde la API
+  const getMovies = (page) => {
+    const apiKey = 'ce209e5ff09d9bb827b2cd4025cd595c';
+
+    fetch(`https://api.themoviedb.org/3/discover/movie?api_key=${apiKey}&page=${page}`)
       .then(response => response.json())
       .then(responseData => {
         if (responseData && responseData.results) {
@@ -19,7 +27,7 @@ export const MoviesList = () => {
       .catch(err => {
         console.error(err.message);
       });
-  }, [currentPage]);
+  };
 
   return {
     movies, currentPage, setCurrentPage

@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from 'react';
-import { getGenre } from '../../utils/api/moviesRepository';
-import { MoviesList } from '../../utils/api/moviesRepository';
+import { getGenre } from '../../utils/Services/moviesRepository';
+import { MoviesList } from '../../utils/Services/moviesRepository';
 
 const MovieFilter = ({ onYearFilterChange, onGenreFilterChange, filteredYear, filteredGenre }) => {
-  const { movies } = MoviesList();
+  const { movies } = getMovies();
   const [selectedYear, setSelectedYear] = useState(filteredYear);
   const [selectedGenre, setSelectedGenre] = useState(filteredGenre);
   const [genres, setGenres] = useState([]);
