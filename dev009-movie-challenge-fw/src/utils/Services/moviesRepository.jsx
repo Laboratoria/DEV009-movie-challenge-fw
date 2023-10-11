@@ -1,7 +1,10 @@
-export const getMovies = (page) => {
-  const apiKey = 'ce209e5ff09d9bb827b2cd4025cd595c';
+const apiKey = 'ce209e5ff09d9bb827b2cd4025cd595c';
+const apiUrl = 'https://api.themoviedb.org/3';
 
-  return fetch(`https://api.themoviedb.org/3/discover/movie?api_key=${apiKey}&page=${page}`)
+export const getMovies = (page) => {
+  
+
+  return fetch(`${apiUrl}/discover/movie?api_key=${apiKey}&page=${page}`)
     .then(response => response.json())
     .then(responseData => {
       if (responseData && responseData.results) {
@@ -19,7 +22,7 @@ export const getMovies = (page) => {
 
 
 export const getOne = (movieId) => {
-  return fetch(`https://api.themoviedb.org/3/movie/${movieId}?api_key=ce209e5ff09d9bb827b2cd4025cd595c`)
+  return fetch(`${apiUrl}/movie/${movieId}?api_key=${apiKey}`)
     .then(response => response.json())
     .then(responseData => {
       if (responseData) {
@@ -48,18 +51,18 @@ export const getGenre = (movieId) => {
     .catch(err => console.error(err));
 };
 
-export const searchMovie = () => {
+export const searchMovie = (searchText) => {
+  const encodedQuery = encodeURIComponent(searchText);
+  const options = {
+    method: 'GET',
+    headers: {
+      accept: 'application/json',
+      Authorization: 'Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiJjZTIwOWU1ZmYwOWQ5YmI4MjdiMmNkNDAyNWNkNTk1YyIsInN1YiI6IjY1MGE2MGE0ZDZjMzAwMDBjY2UwZjZjYSIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.wlDc2oGZoiPKCJY1QUu-CCVAnCHRNQ5AkwBMPwnwiBY',
+    },
+  };
 
-    const options = {
-      method: 'GET',
-      headers: {
-        accept: 'application/json',
-        Authorization: 'Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiJjZTIwOWU1ZmYwOWQ5YmI4MjdiMmNkNDAyNWNkNTk1YyIsInN1YiI6IjY1MGE2MGE0ZDZjMzAwMDBjY2EwZjZjYSIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.wlDc2oGZoiPKCJY1QUu-CCVAnCHRNQ5AkwBMPwnwiBY',
-      },
-    };
-
-    fetch('https://api.themoviedb.org/3/keyword/movie?api_key=ce209e5ff09d9bb827b2cd4025cd595c', options)
-      .then((response) => response.json())
-      .then((data) => console.log(data))
-      .catch((err) => console.error(err));
+  return fetch(`https://api.themoviedb.org/3/search/movie?api_key=ce209e5ff09d9bb827b2cd4025cd595c&query=${encodedQuery}`, options)
+  .then(response => response.json())
+  .then(response => console.log(response))
+  .catch(err => console.error(err));
 };

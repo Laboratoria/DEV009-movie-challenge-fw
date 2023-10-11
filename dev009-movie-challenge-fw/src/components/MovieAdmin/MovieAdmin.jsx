@@ -1,6 +1,6 @@
-import React, { useState, useMemo, useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import './MovieAdmin.css';
-import { getMovies, searchMovie } from '../../utils/Services/moviesRepository'; 
+import { searchMovie } from '../../utils/Services/moviesRepository'; 
 import Header from '../header/Header';
 import ListMovies from '../ListMovies/ListMovies';
 import OrderBy from '../OrderBy/OrderBy';
@@ -22,6 +22,7 @@ const MovieAdmin = () => {
   const itemsPerPage = 20; 
   const [totalPages, setTotalPages] = useState(1);
   const sortedList = useSortedList(list, selectedSortOption);
+  const [searchTerm, setSearchTerm] = useState('');
 
 
   // Funciones de manejo de eventos
@@ -40,6 +41,19 @@ const MovieAdmin = () => {
   const handleMovieClick = (movieId) => {
     setSelectedMovie(movieId);
   };
+  const handleSearch = (searchText) => {
+    // Realiza la búsqueda y pasa el texto de búsqueda
+    searchMovie(searchText)
+      .then((results) => {
+        // Actualiza el estado local con los resultados de la búsqueda
+        setList(results); // Asume que results es la lista de películas de la búsqueda
+      })
+      .catch((error) => {
+        console.error('Error en la búsqueda:', error);
+        // Maneja el error, si es necesario
+      });
+  };
+  
   useEffect(() => {
     if (movies) {
       // Assuming movies is an array of movie objects
@@ -49,7 +63,7 @@ const MovieAdmin = () => {
 
   return (
     <div>
-        <Header onSearch={searchMovie} />
+        <Header onSearch={() => searchMovie(searchTerm)} onSearchTermChange={handleSearch} />
 
         <div className="presentation">
         <div className="intro-text">
