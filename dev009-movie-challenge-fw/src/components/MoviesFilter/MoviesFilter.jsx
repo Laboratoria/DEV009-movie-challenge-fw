@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import { getGenre } from '../../utils/Services/moviesRepository';
-import { MoviesList } from '../../utils/Services/moviesRepository';
+import { useMovies } from '../../utils/CustomHook/useMovies'
 
 const MovieFilter = ({ onYearFilterChange, onGenreFilterChange, filteredYear, filteredGenre }) => {
-  const { movies } = getMovies();
+  const { movies } = useMovies();
   const [selectedYear, setSelectedYear] = useState(filteredYear);
   const [selectedGenre, setSelectedGenre] = useState(filteredGenre);
   const [genres, setGenres] = useState([]);

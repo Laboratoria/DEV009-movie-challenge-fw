@@ -1,37 +1,20 @@
-import { useEffect, useState } from 'react';
+export const getMovies = (page) => {
+  const apiKey = 'ce209e5ff09d9bb827b2cd4025cd595c';
 
-export const MoviesList = () => {
-  const [movies, setMovies] = useState([]);
-  const [currentPage, setCurrentPage] = useState(1);
-
-
-  useEffect(() => {
-    // Cuando cambia la página actual, llamamos a getMovies
-    getMovies(currentPage);
-  }, [currentPage]);
-
-  // Función para obtener películas desde la API
-  const getMovies = (page) => {
-    const apiKey = 'ce209e5ff09d9bb827b2cd4025cd595c';
-
-    fetch(`https://api.themoviedb.org/3/discover/movie?api_key=${apiKey}&page=${page}`)
-      .then(response => response.json())
-      .then(responseData => {
-        if (responseData && responseData.results) {
-          const moviesData = responseData.results;
-          setMovies(moviesData);
-        } else {
-          console.error('La respuesta de la API está vacía o no es válida.');
-        }
-      })
-      .catch(err => {
-        console.error(err.message);
-      });
-  };
-
-  return {
-    movies, currentPage, setCurrentPage
-  };
+  return fetch(`https://api.themoviedb.org/3/discover/movie?api_key=${apiKey}&page=${page}`)
+    .then(response => response.json())
+    .then(responseData => {
+      if (responseData && responseData.results) {
+        return responseData.results;
+      } else {
+        console.error('La respuesta de la API está vacía o no es válida.');
+        return [];
+      }
+    })
+    .catch(err => {
+      console.error(err.message);
+      return [];
+    });
 };
 
 

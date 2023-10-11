@@ -4,14 +4,13 @@ import Header from '../components/header/Header';
 import ListMovies from '../components/ListMovies/ListMovies';
 import MovieDetail from '../components/MovieDetail/MovieDetail';
 import MoviesRepository from '../utils/Services/moviesRepository'; // Import the data fetching component
-import MovieAdmin from '../components/App/App';
+import MovieAdmin from '../components/MovieAdmin/MovieAdmin';
 
 function App() {
   return (
     <Router>
       <Routes>
         <Route path="/" element={<MovieAdmin />} />
-        <Route path="/movies" element={<ListMovies />} />
         <Route
           path="/movie/:movieId"element={<MovieDetail  />}
         />

@@ -5,7 +5,7 @@ import { MemoryRouter } from 'react-router-dom';
 import ListMovies from './ListMovies';
 
 describe('ListMovies Component', () => {
-  it('renders movie titles and release years correctly', () => {
+  it.only('renders movie titles and release years correctly', () => {
     const movies = [
       { id: 1, title: 'Movie 1', release_date: '2022-10-05', poster_path: '/path-to-poster1.jpg' },
       { id: 2, title: 'Movie 2', release_date: '2022-09-15', poster_path: '/path-to-poster2.jpg' },

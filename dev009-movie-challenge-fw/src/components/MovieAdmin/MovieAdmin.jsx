@@ -1,23 +1,28 @@
 import React, { useState, useMemo, useEffect } from 'react';
-import './App.css';
-import { MoviesList, searchMovie } from '../../utils/Services/moviesRepository'; 
+import './MovieAdmin.css';
+import { getMovies, searchMovie } from '../../utils/Services/moviesRepository'; 
 import Header from '../header/Header';
 import ListMovies from '../ListMovies/ListMovies';
 import OrderBy from '../OrderBy/OrderBy';
 import MovieFilter from '../MoviesFilter/MoviesFilter';
-import MovieDetail from '..//MovieDetail/MovieDetail';
+import MovieDetail from '../MovieDetail/MovieDetail';
 import Paginacion from '../Paginacion/Paginacion';
+import { useMovies} from '../../utils/CustomHook/useMovies'
+import { useSortedList } from '../../utils/CustomHook/useSortedList'
 
 const MovieAdmin = () => {
   // Desestructuración de objetos
-  const { movies, currentPage, setCurrentPage } = MoviesList();
+  const { movies, currentPage, setCurrentPage } = useMovies();
   // Estado
   const [list, setList] = useState([]);
   const [selectedSortOption, setSelectedSortOption] = useState('all');
   const [filteredYear, setFilteredYear] = useState('all');
   const [selectedMovie, setSelectedMovie] = useState(null);
   const [filteredGenre, setFilteredGenre] = useState('all');
-  const itemsPerPage = 20; // Número de películas por página
+  const itemsPerPage = 20; 
+  const [totalPages, setTotalPages] = useState(1);
+  const sortedList = useSortedList(list, selectedSortOption);
+
 
   // Funciones de manejo de eventos
   const handleYearFilterChange = (year) => {
@@ -35,36 +40,12 @@ const MovieAdmin = () => {
   const handleMovieClick = (movieId) => {
     setSelectedMovie(movieId);
   };
-  const [sortedList, setSortedList] = useState([]);
   useEffect(() => {
     if (movies) {
       // Assuming movies is an array of movie objects
       setList(movies);
     }
   }, [movies]);
-
-  // useEffect to update the sortedList whenever movies or selectedSortOption changes
-  useEffect(() => {
-    if (movies) {
-      const [sortField, sortOrder] = selectedSortOption.split('-');
-
-      // Clone the list to avoid modifying the state directly
-      const nextList = [...list];
-
-      // Apply the sorting logic
-      nextList.sort((a, b) => {
-        if (sortField === 'title') {
-          return sortOrder === 'asc' ? a.title.localeCompare(b.title) : b.title.localeCompare(a.title);
-        } else if (sortField === 'vote_average') {
-          return sortOrder === 'asc' ? a.vote_average - b.vote_average : b.vote_average - a.vote_average;
-        }
-        return 0;
-      });
-
-      setSortedList(nextList);
-    }
-  }, [movies, list, selectedSortOption]);
-
 
   return (
     <div>

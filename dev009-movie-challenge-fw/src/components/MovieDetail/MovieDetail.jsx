@@ -1,7 +1,7 @@
 // MovieDetail.jsx
 import React, { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
-import { getOne } from '../../utils/api/moviesRepository';
+import { getOne } from '../../utils/Services/moviesRepository';
 import { Link } from 'react-router-dom';
 
 const MovieDetail = ({genres}) => {
@@ -29,7 +29,7 @@ const MovieDetail = ({genres}) => {
         <button className="custom-button">Back to movie list</button>
       </Link>
 
-        <div className="container mt-5">
+      <div className="container mt-5">
           <h1 className="movie-title">{selectedMovie.title}</h1>
           <img
             src={`https://image.tmdb.org/t/p/w200${selectedMovie.poster_path}`}
