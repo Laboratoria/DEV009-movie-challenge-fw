@@ -59,7 +59,7 @@ const MovieAdmin = () => {
       // Assuming movies is an array of movie objects
       setList(movies);
     }
-  }, [movies]);
+  }, [movies]);  
 
   return (
     <div>

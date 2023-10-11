@@ -17,7 +17,6 @@ const Header = ({ onSearch }) => {
     <header>
       <nav>
         <ul>
-          <li><Link to="/">Home</Link></li>
           <li>
             <input
               type="text"
