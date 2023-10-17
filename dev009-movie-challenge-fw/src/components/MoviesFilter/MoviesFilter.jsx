@@ -1,61 +1,29 @@
 import React, { useState, useEffect } from 'react';
 import { getGenre } from '../../utils/Services/moviesRepository';
-import { useMovies } from '../../utils/CustomHook/useMovies'
 
-const MovieFilter = ({ onYearFilterChange, onGenreFilterChange, filteredYear, filteredGenre }) => {
-  const { movies } = useMovies();
-  const [selectedYear, setSelectedYear] = useState(filteredYear);
-  const [selectedGenre, setSelectedGenre] = useState(filteredGenre);
+const MovieFilter = ({ selectedGenre, setSelectedGenre }) => {
   const [genres, setGenres] = useState([]);
 
-  // Extract the years from the movies and remove duplicates
-  const years = [...new Set(movies.map(movie => movie.release_date.split('-')[0]))];
-
-  useEffect(() => {
-    onYearFilterChange(selectedYear);
-  }, [selectedYear, onYearFilterChange]);
-
-  useEffect(() => {
-    onGenreFilterChange(selectedGenre);
-  }, [selectedGenre, onGenreFilterChange]);
-
+  
   useEffect(() => {
     // Call the getGenre function to get the list of genres
     getGenre()
       .then((genreData) => {
-        setGenres(genreData.genres);
+        setGenres(genreData.genres); // Actualiza el estado con los géneros obtenidos
+        setSelectedGenre(selectedGenre);
       })
       .catch((error) => {
         console.error('Error getting genres:', error);
       });
   }, []);
-  
-  const handleYearChange = (e) => {
-    setSelectedYear(e.target.value);
-  };
 
   const handleGenreChange = (e) => {
-    setSelectedGenre(e.target.value);
+    const newSelectedGenre = e.target.value;
+    setSelectedGenre(newSelectedGenre);
   };
 
   return (
     <div className="filter-container">
-      <div className="year-filter">
-        <h3>FILTER BY YEAR</h3>
-        <select
-          title="Dropdown filtro por año"
-          className="year-filter-options"
-          value={selectedYear}
-          onChange={handleYearChange}
-        >
-          <option value="all">All</option>
-          {years.map((year) => (
-            <option key={year} value={year}>
-              {year}
-            </option>
-          ))}
-        </select>
-      </div>
       <div className="genre-filter">
         <h3>FILTER BY GENRE</h3>
         <select
@@ -77,3 +45,4 @@ const MovieFilter = ({ onYearFilterChange, onGenreFilterChange, filteredYear, fi
 };
 
 export default MovieFilter;
+

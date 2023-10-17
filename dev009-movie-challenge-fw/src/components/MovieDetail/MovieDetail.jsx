@@ -1,44 +1,43 @@
-// MovieDetail.jsx
 import React, { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import { getOne } from '../../utils/Services/moviesRepository';
 import { Link } from 'react-router-dom';
+import Header from '../header/Header';
 
-const MovieDetail = ({genres}) => {
+const MovieDetail = ({ genres }) => {
   const [selectedMovie, setSelectedMovie] = useState({});
-  const { movieId } = useParams(); // Obtiene el movieId de los parámetros de la URL
+  const { movieId } = useParams();
 
   useEffect(() => {
-    // Llamo  a la función getOne con el movieId que obtuve
+    // Llamar a la función getOne con el movieId obtenido de los parámetros de la URL
     getOne(movieId)
-      .then((movieData) => {
-        setSelectedMovie(movieData);
+      .then((movieDetails) => {
+        setSelectedMovie(movieDetails);
       })
       .catch((error) => {
         console.error('Error al obtener los detalles de la película:', error);
       });
   }, [movieId]);
 
-
   return (
+
     <main>
       <div className="movie-card-detail">
-      <div className="movie-detail">
+        <div className="movie-detail">
+          <Link to="/">
+            <button className="custom-button">Back to movie list</button>
+          </Link>
 
-      <Link to="/">
-        <button className="custom-button">Back to movie list</button>
-      </Link>
-
-      <div className="container mt-5">
-          <h1 className="movie-title">{selectedMovie.title}</h1>
-          <img
-            src={`https://image.tmdb.org/t/p/w200${selectedMovie.poster_path}`}
-            alt={selectedMovie.title}
-            className="movie-poster-detail"
-        />
+          <div className="container mt-5">
+            <h1 className="movie-title">{selectedMovie.title}</h1>
+            <img
+              src={`https://image.tmdb.org/t/p/w200${selectedMovie.poster_path}`}
+              alt={selectedMovie.title}
+              className="movie-poster-detail"
+            />
+          </div>
         </div>
-      </div>
-      
+
         <div className="MovieCaptions">
           <p className="release-year">
             Release Year: {selectedMovie.release_date ? selectedMovie.release_date.split('-')[0] : 'N/A'}
@@ -46,15 +45,13 @@ const MovieDetail = ({genres}) => {
 
           <h4>Overview:</h4>
           <p className="movie-overview">{selectedMovie.overview}</p>
-          <p className="movie-score">{'Score:' + selectedMovie.vote_average}</p>
+          <p className="movie-score">{'Score: ' + selectedMovie.vote_average}</p>
 
           <div className="movie-genres">
             <h4>Genres:</h4>
             <ul>
               {selectedMovie.genres && selectedMovie.genres.map((genre) => (
-                <li key={genre.id}>
-                  {genre.name}
-                </li>
+                <li key={genre.id}>{genre.name}</li>
               ))}
             </ul>
           </div>
@@ -74,10 +71,9 @@ const MovieDetail = ({genres}) => {
             )}
           </div>
         </div>
-
-        </div>
-  </main>
-);
+      </div>
+    </main>
+  );
 };
 
 export default MovieDetail;

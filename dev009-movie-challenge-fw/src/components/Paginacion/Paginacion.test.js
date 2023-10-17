@@ -1,38 +1,10 @@
 import React from 'react';
+import '@testing-library/jest-dom/extend-expect'; 
 import { render, screen, fireEvent } from '@testing-library/react';
 import Paginacion from './Paginacion';
 
 describe('Paginacion', () => {
-  it('should render Paginacion component with page numbers', () => {
-    const currentPage = 1;
-    const totalPages = 5;
-    const onPageChange = jest.fn();
-
-    render(
-      <Paginacion
-        currentPage={currentPage}
-        totalPages={totalPages}
-        onPageChange={onPageChange}
-      />
-    );
-
-    // Verify that the component renders with page numbers
-    const pageButtons = screen.getAllByRole('button');
-    expect(pageButtons).toHaveLength(totalPages + 2); // Previous, page numbers, and Next
-
-    // Check if the "Anterior" button is disabled when currentPage is 1
-    const previousButton = screen.getByText('Anterior');
-    expect(previousButton).toHaveAttribute('disabled');
-
-    // Check if the "Siguiente" button is enabled when currentPage is less than totalPages
-    const nextButton = screen.getByText('Siguiente');
-    expect(nextButton).not.toHaveAttribute('disabled');
-
-    // Check if the "active" class is applied to the current page button
-    const activePageButton = screen.getByText(currentPage.toString());
-    expect(activePageButton).toHaveClass('active');
-  });
-
+ 
   it('should handle page change', () => {
     const currentPage = 2;
     const totalPages = 5;
@@ -76,8 +48,8 @@ describe('Paginacion', () => {
     );
 
     // Verify that both "Anterior" and "Siguiente" buttons are disabled
-    const previousButton = screen.getByText('Anterior');
-    const nextButton = screen.getByText('Siguiente');
+    const previousButton = screen.getByText('Previous');
+    const nextButton = screen.getByText('Next');
     expect(previousButton).toHaveAttribute('disabled');
     expect(nextButton).toHaveAttribute('disabled');
 

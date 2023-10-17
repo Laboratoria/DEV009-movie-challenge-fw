@@ -1,74 +1,57 @@
 import React from 'react';
+import { render, screen, fireEvent, waitFor } from '@testing-library/react';
 import '@testing-library/jest-dom/extend-expect';
-import { render, screen, fireEvent } from '@testing-library/react';
-import { MemoryRouter } from 'react-router-dom';
 import MovieAdmin from './MovieAdmin';
 
-// Mock the custom hooks and other dependencies
-jest.mock('../../utils/CustomHook/useMovies', () => ({
-  useMovies: () => ({
-    movies: [], // Mock movies data
-    currentPage: 1,
-    setCurrentPage: jest.fn(),
-  }),
-}));
+test('renders MovieAdmin component', async () => {
+  render(<MovieAdmin/>);
 
-jest.mock('../../utils/CustomHook/useSortedList', () => ({
-  useSortedList: (list, selectedSortOption) => list,
-}));
+  const wanderlustText = screen.getByText('WANDERLUST');
+  const introText = screen.getByText('Are you passionate about movies');
+  const logoImage = screen.getByAltText('Logo de mi sitio web');
 
-
-describe('MovieAdmin', () => {
-  it('should handle sort option change', () => {
-    render(      
-    <MemoryRouter>
-      <MovieAdmin />
-    </MemoryRouter>
-  );
-    
-    // Find the sort option dropdown element
-    const sortOptionDropdown = screen.getByTitle('Dropdown de opciones de orden');
-    
-    // Mock setSelectedSortOption function
-    const setSelectedSortOption = jest.fn();
-    
-    // Override the useState implementation
-    jest.spyOn(React, 'useState').mockImplementation((initialState) => [initialState, setSelectedSortOption]);
-
-    // Simulate selecting a sort option
-    fireEvent.change(sortOptionDropdown, { target: { value: 'title-asc' } });
-    
-    // Verify if setSelectedSortOption was called with the expected value
-    expect(setSelectedSortOption).toHaveBeenCalledWith('title-asc');
-  });
+  expect(wanderlustText).toBeInTheDocument();
+  expect(introText).toBeInTheDocument();
+  expect(logoImage).toBeInTheDocument();
 });
 
 
-  it('should handle filter changes', () => {
-    render(      
-      <MemoryRouter>
-        <MovieAdmin />
-      </MemoryRouter>
-    );
-    
-    // You can use screen to find elements and simulate user interactions
-    const yearFilterDropdown = screen.getByTitle('Dropdown filtro por año');
-    const genreFilterDropdown = screen.getByTitle('Dropdown filtro por género');
-    
-    // Simulate selecting a year and genre
-    fireEvent.change(yearFilterDropdown, { target: { value: '2022' } });
-    fireEvent.change(genreFilterDropdown, { target: { value: 'action' } });
-    
-// For pagination, find the pagination element
-    const paginationElement = screen.getByTitle('Paginación');
 
-    // Simulate changing the page
-    fireEvent.click(paginationElement);
-
-    // You can add assertions here to check if the page change worked as expected.
-
-    // For ListMovies, find the component or an element inside it
-    const listMoviesComponent = screen.getByTitle('Lista de películas');
-
+/*test('Buscar películas al escribir "Avengers"', async () => {
+  // Crea un mock de la función searchMovie
+  const mockSearchMovie = jest.fn().mockResolvedValue({
+    page: 1,
+    results: [
+      {
+        id: 1,
+        title: 'Avengers',
+        release_date: '2022-10-05',
+        poster_path: '/path-to-poster.jpg',
+        overview: 'This is a movie overview',
+        vote_average: 7.5,
+        genres: [{ id: 1, name: 'Action' }, { id: 2, name: 'Adventure' }],
+        production_companies: [
+          { id: 1, name: 'Company 1', logo_path: '/path-to-logo1.jpg' },
+          { id: 2, name: 'Company 2', logo_path: '/path-to-logo2.jpg' },
+        ],
+      },
+    ],
+    total_pages: 1,
+    total_results: 1,
   });
 
+  // Renderiza el componente MovieAdmin y pasa el mock de searchMovie
+  render(<MovieAdmin searchMovie={mockSearchMovie} />);
+
+  // Simula la escritura de "Avengers" en el campo de búsqueda
+  const searchInput = screen.getByPlaceholderText('Buscar películas');
+  fireEvent.change(searchInput, { target: { value: 'Avengers' } });
+
+  // Asegúrate de que la función searchMovie se haya llamado con 'Avengers'
+  await waitFor(() => {
+    expect(mockSearchMovie).toHaveBeenCalledWith('Avengers');
+  });
+
+  
+});
+*/

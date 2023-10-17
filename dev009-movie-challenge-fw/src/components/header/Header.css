@@ -21,3 +21,7 @@ header {
     font-weight: normal;
     padding: 10px;
   }
+
+  .custom-button {
+    background-color: #c26f84; /* Cambia el color de fondo del botón */
+  }

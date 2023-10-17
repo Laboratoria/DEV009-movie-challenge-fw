@@ -1,39 +1,13 @@
-import React, { useMemo } from 'react';
+import React from 'react';
 import { Link } from 'react-router-dom';
 import './ListMovies.css'
 
 
-const ListMovies = ({ movies, sortedList, filteredYear, filteredGenre }) => {
-  const filteredAndSortedMovies = useMemo(() => {
-  console.log(sortedList)
-
-    let filteredMovies = sortedList; // Use the sortedList prop for sorting
-
-    if (filteredYear !== 'all') {
-      // Filter based on the original 'movies' prop
-      filteredMovies = movies.filter((movie) => {
-        return movie.release_date.split('-')[0] === filteredYear;
-      });
-    }
-
-    // Filtrar por género
-    if (filteredGenre !== 'all') {
-      // Filter based on the original 'movies' prop
-      filteredMovies = filteredMovies.filter((movie) => {
-        // Check if movie is defined and has 'genre_ids' property
-        if (movie && movie.genre_ids) {
-          return movie.genre_ids.includes(parseInt(filteredGenre));
-        }
-        return false; // Return false if 'movie' is undefined or has no 'genre_ids'
-      });
-    }
-
-    return filteredMovies;
-  }, [movies, sortedList, filteredYear, filteredGenre]);
+const ListMovies = ({movies}) => {
 
   return (
     <div className="movies-grid">
-      {filteredAndSortedMovies.map((movie) => (
+      {movies.map((movie) => (
         <Link to={`/movie/${movie.id}`} key={movie.id}>
           <div className="movie-card">
             <img

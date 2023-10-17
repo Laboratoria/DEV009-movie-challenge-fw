@@ -1,81 +1,58 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState,useEffect} from 'react';
 import './MovieAdmin.css';
-import { searchMovie } from '../../utils/Services/moviesRepository'; 
+import { searchMovie, getMovieSorted } from '../../utils/Services/moviesRepository'; 
 import Header from '../header/Header';
 import ListMovies from '../ListMovies/ListMovies';
 import OrderBy from '../OrderBy/OrderBy';
 import MovieFilter from '../MoviesFilter/MoviesFilter';
-import MovieDetail from '../MovieDetail/MovieDetail';
 import Paginacion from '../Paginacion/Paginacion';
-import { useMovies} from '../../utils/CustomHook/useMovies'
-import { useSortedList } from '../../utils/CustomHook/useSortedList'
+import { useMovies} from '../../utils/CustomHook/useMovies';
+import { useSortedList } from '../../utils/CustomHook/useSortedList';
+import logo from '../../assets/img/logo.png';
+
 
 const MovieAdmin = () => {
-  // Desestructuración de objetos
-  const { movies, currentPage, setCurrentPage } = useMovies();
-  // Estado
-  const [list, setList] = useState([]);
+ 
+  const { movies, setMovies, currentPage, setCurrentPage, selectedGenre, setSelectedGenre } = useMovies();
   const [selectedSortOption, setSelectedSortOption] = useState('all');
-  const [filteredYear, setFilteredYear] = useState('all');
-  const [selectedMovie, setSelectedMovie] = useState(null);
-  const [filteredGenre, setFilteredGenre] = useState('all');
   const itemsPerPage = 20; 
   const [totalPages, setTotalPages] = useState(1);
-  const sortedList = useSortedList(list, selectedSortOption);
+  const sortedList = useSortedList(movies, selectedSortOption);
   const [searchTerm, setSearchTerm] = useState('');
+  const [searchResults, setSearchResults] = useState([]);
 
+    const handleSearch = (searchTerm) => {
+      // Llama a la función de búsqueda
+      searchMovie(searchTerm)
+        .then((response) => {
+          // Actualiza el estado con los resultados
+          setSearchResults(response.results);
+        })
+        .catch((error) => {
+          console.error(error);
+        });
+    }
 
-  // Funciones de manejo de eventos
-  const handleYearFilterChange = (year) => {
-    setFilteredYear(year);
-  };
-
-  const handleGenreFilterChange = (genre) => {
-    setFilteredGenre(genre);
-  };
-
+ 
   const handleSortOptionChange = (event) => {
     setSelectedSortOption(event.target.value);
   };
 
-  const handleMovieClick = (movieId) => {
-    setSelectedMovie(movieId);
-  };
-  const handleSearch = (searchText) => {
-    // Realiza la búsqueda y pasa el texto de búsqueda
-    searchMovie(searchText)
-      .then((results) => {
-        // Actualiza el estado local con los resultados de la búsqueda
-        setList(results); // Asume que results es la lista de películas de la búsqueda
-      })
-      .catch((error) => {
-        console.error('Error en la búsqueda:', error);
-        // Maneja el error, si es necesario
-      });
-  };
-  
-  useEffect(() => {
-    if (movies) {
-      // Assuming movies is an array of movie objects
-      setList(movies);
-    }
-  }, [movies]);  
-
   return (
     <div>
-        <Header onSearch={() => searchMovie(searchTerm)} onSearchTermChange={handleSearch} />
+        <Header onSearch={handleSearch} />
 
         <div className="presentation">
         <div className="intro-text">
           <h1>WANDERLUST<br />MOVIES TRAVELER COMMUNITY</h1>
           <div>
-            <p>¿Eres un apasionado de las películas y también un espíritu libre que vive viajando por el mundo?. No importa dónde te encuentres, puedes disfrutar de tus películas favoritas, mientras exploras nuevos destinos aquí.</p>
-            <p>¡Descarga la aplicación y comienza a explorar hoy mismo!"</p>
+            <p>Are you passionate about movies and also a free spirit who lives traveling the world? No matter where you are, you can enjoy your favorite movies, while exploring new destinations here.</p>
+            <p>¡Download the app and start exploring today!"</p>
           </div>
         </div>
         <div>
           <img
-            src={require('../../assets/img/logo.png')}
+            src={logo}
             alt="Logo de mi sitio web"
             className="logo"
           />
@@ -86,11 +63,8 @@ const MovieAdmin = () => {
             <div className="side">
               <div className="filters">
               <MovieFilter
-                movies={list}
-                onYearFilterChange={handleYearFilterChange}
-                onGenreFilterChange={handleGenreFilterChange} // Make sure this is passed correctly
-                filteredYear={filteredYear}
-                filteredGenre={filteredGenre}
+                selectedGenre={selectedGenre} 
+                setSelectedGenre={setSelectedGenre}
               />
 
               <OrderBy 
@@ -106,20 +80,15 @@ const MovieAdmin = () => {
                 onPageChange={(newPage) => setCurrentPage(newPage)}
               />
               
-              <ListMovies
-                movies={movies} 
-                filteredYear={filteredYear}
-                filteredGenre={filteredGenre}
-                sortedList={sortedList}
-                onMovieClick={handleMovieClick}
-              />
+              <ListMovies movies={searchResults.length ? searchResults : sortedList} />
+
 
               <Paginacion
                 currentPage={currentPage}
-                totalPages={movies.total_pages}
+                totalPages={totalPages}
                 onPageChange={(newPage) => setCurrentPage(newPage)}
             />
-
+          
           </div>
         </main>
     </div>

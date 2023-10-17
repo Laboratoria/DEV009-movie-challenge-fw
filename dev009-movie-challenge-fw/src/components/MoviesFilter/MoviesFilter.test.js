@@ -1,62 +1,27 @@
-import React from 'react';
-import { render, screen, fireEvent } from '@testing-library/react';
+import React, { useState } from 'react';
+import '@testing-library/jest-dom/extend-expect';
+import { waitFor, render, screen } from '@testing-library/react';
 import MovieFilter from './MoviesFilter';
-import * as moviesRepository from '../../utils/Services/moviesRepository'; // Importa el módulo que deseas simular
+import { getGenre } from '../../utils/Services/moviesRepository';
 
-describe('MovieFilter', () => {
-  it('should filter by year', async () => {
-    // Simular datos ficticios que devolverá getMovies
-    jest.spyOn(moviesRepository, 'getMovies').mockResolvedValue([]);
+// Mock de la función getGenre para simular la respuesta de la API
+jest.mock('../../utils/Services/moviesRepository', () => ({
+  getGenre: jest.fn(() => Promise.resolve({ genres: [{ id: 1, name: 'Action' }, { id: 2, name: 'Adventure' }] })),
+}));
 
-    // Restablecer el estado del mock antes de cada prueba
-    jest.clearAllMocks();
-    jest.spyOn(moviesRepository, 'getGenre').mockResolvedValue({ genres: [] });
+describe('MovieFilter Component', () => {
+  it('renders movie details correctly', async () => {
 
-    const onYearFilterChange = jest.fn();
-    
-    // Render the MovieFilter component
     render(
       <MovieFilter
-        onYearFilterChange={jest.fn()}
-        onGenreFilterChange={jest.fn()}
-        filteredYear="all"
-        filteredGenre="all"
+        setSelectedGenre={jest.fn()}
       />
     );
+    await waitFor(() => {
 
-
-    // Find the year filter dropdown
-    const yearFilterDropdown = screen.getByTitle('Dropdown filtro por año');
-
-    // Simulate selecting a year
-    fireEvent.change(yearFilterDropdown, { target: { value: '2022' } });
-
-  });
-
-  it('should filter by genre', () => {
-    // Simular datos ficticios que devolverá getMovies
-    moviesRepository.getMovies.mockResolvedValue([
-      // Agrega películas simuladas aquí
-    ]);
-
-    // Restablecer el estado del mock antes de cada prueba
-    moviesRepository.getMovies.mockClear();
-    const onGenreFilterChange = jest.fn();
-    // Render the MovieFilter component
-    render(
-      <MovieFilter
-        onYearFilterChange={jest.fn()}
-        onGenreFilterChange={jest.fn()}
-        filteredYear="all"
-        filteredGenre="all"
-      />
-    );
-
-    // Find the genre filter dropdown
-    const genreFilterDropdown = screen.getByTitle('Dropdown filtro por género');
-
-    // Simulate selecting a genre
-    fireEvent.change(genreFilterDropdown, { target: { value: '2' } });
-
+      // Simulando la selección del género
+      expect(screen.getByText('FILTER BY GENRE')).toBeInTheDocument();
+      expect(screen.getByTitle('Dropdown filtro por género')).toHaveValue('all');
+    });
   });
 });
