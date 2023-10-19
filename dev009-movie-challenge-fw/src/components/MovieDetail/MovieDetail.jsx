@@ -1,7 +1,9 @@
 import React, { useState, useEffect } from 'react';
+import './MovieDetail.css'
 import { useParams } from 'react-router-dom';
 import { getOne } from '../../utils/Services/moviesRepository';
 import { Link } from 'react-router-dom';
+import logo from '../../assets/img/logo.png';
 
 const MovieDetail = ({ genres }) => {
   const [selectedMovie, setSelectedMovie] = useState({});
@@ -19,7 +21,15 @@ const MovieDetail = ({ genres }) => {
   }, [movieId]);
 
   return (
-
+    <div>
+      <div className='imgContainer'>
+          <img
+          src={logo}
+          alt="Logo de mi sitio web"
+          className="logo-detail"
+        /> 
+      </div>
+  
     <main>
       <div className="movie-card-detail">
         <div className="movie-detail">
@@ -72,6 +82,7 @@ const MovieDetail = ({ genres }) => {
         </div>
       </div>
     </main>
+  </div>
   );
 };
 

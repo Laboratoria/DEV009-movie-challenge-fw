@@ -62,7 +62,7 @@
   align-items: center;
   font-family: var(--font-family-main-text);
 }
-main {
+.mainContainer {
   display: flex;
   background-color: #fff;
   padding: 20px;

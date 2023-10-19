@@ -60,35 +60,37 @@ const MovieAdmin = () => {
       </div>
 
         <main>
-            <div className="side">
-              <div className="filters">
-              <MovieFilter
-                selectedGenre={selectedGenre} 
-                setSelectedGenre={setSelectedGenre}
-              /> 
+          <div className='mainContainer'>
+              <div className="side">
+                <div className="filters">
+                <MovieFilter
+                  selectedGenre={selectedGenre} 
+                  setSelectedGenre={setSelectedGenre}
+                /> 
 
-              <OrderBy 
-                selectedSortOption={selectedSortOption} 
-                handleSortOptionChange={handleSortOptionChange} 
-                />
+                <OrderBy 
+                  selectedSortOption={selectedSortOption} 
+                  handleSortOptionChange={handleSortOptionChange} 
+                  />
+                </div>
               </div>
-            </div>
-          <div className="movies">
-            <Paginacion
-                currentPage={currentPage}
-                totalPages={movies.total_pages}
-                onPageChange={(newPage) => setCurrentPage(newPage)}
-              />
-              
-              <ListMovies movies={searchResults.length ? searchResults : sortedList} />
-
-
+            <div className="movies">
               <Paginacion
-                currentPage={currentPage}
-                totalPages={totalPages}
-                onPageChange={(newPage) => setCurrentPage(newPage)}
-            />
-          
+                  currentPage={currentPage}
+                  totalPages={movies.total_pages}
+                  onPageChange={(newPage) => setCurrentPage(newPage)}
+                />
+                
+                <ListMovies movies={searchResults.length ? searchResults : sortedList} />
+
+
+                <Paginacion
+                  currentPage={currentPage}
+                  totalPages={totalPages}
+                  onPageChange={(newPage) => setCurrentPage(newPage)}
+              />
+            
+            </div>
           </div>
         </main>
     </div>

@@ -9,9 +9,7 @@ header {
     display: flex;
   }
   
-  nav ul li a:visited {
-    color: black; /* Cambia "white" por el color deseado para enlaces visitados */
-  }
+
   
   nav ul li a {
     text-decoration: none;

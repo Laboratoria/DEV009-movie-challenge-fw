@@ -4,12 +4,13 @@
   }
   
   .custom-button {
-    background-color:#4FC34D;
-    color:#fcfcfc;
+    background-color:#e7c1cb;
+    font-family: var(--font-family-main-text);
   }
   .movie-title{
-    font-size: 24px;
+    font-size: 36px;
     font-weight: bold;
+    align-self: center;
   }
   .production-company-logo {
     width: 100px; 
@@ -22,18 +23,9 @@
     padding:5vh;
   }
   
-  .MovieCaptions{
-    align-self: center;
-  }
-  .movie-detail{
-    align-self: center;
-  }
+
   .movie-card-detail {
-    position: absolute;
-    top: 0;
-    right: 0;
-    bottom: 0;
-    left: 0;
+
     display: flex;
     background-color: var(--container-color);
     padding: 20px;
@@ -41,9 +33,19 @@
     font-family: var(--font-family-main-text);
     width: 100%;
     height: 100%;
-    padding:15px
+
   }
 
-  .main{
+
+
+  .logo-detail{
+    width:15%;
+  }
+  .imgContainer{
+    background-color: #e2727f;
     display: flex;
+    justify-content: center;
+  }
+  main{
+    border:0;
   }
