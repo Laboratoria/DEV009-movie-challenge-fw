@@ -25,3 +25,7 @@ header {
   .custom-button {
     background-color: #c26f84; /* Cambia el color de fondo del botón */
   }
+
+  .input-search{
+    font-family: 'Poppins', sans-serif;
+  }

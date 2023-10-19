@@ -2,7 +2,6 @@ import React, { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import { getOne } from '../../utils/Services/moviesRepository';
 import { Link } from 'react-router-dom';
-import Header from '../header/Header';
 
 const MovieDetail = ({ genres }) => {
   const [selectedMovie, setSelectedMovie] = useState({});

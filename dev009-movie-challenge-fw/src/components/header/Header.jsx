@@ -20,6 +20,7 @@ const Header = ({ onSearch }) => {
             <input
               type="text"
               placeholder="Buscar películas"
+              className='input-search'
               value={searchTerm}
               onChange={handleSearchChange}
             />

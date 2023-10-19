@@ -20,7 +20,6 @@ test('Buscar películas al escribir "Avengers"', async () => {
   await waitFor(() => {
     // Verifica que la función mockOnSearch se haya llamado con 'Avengers'
     return expect(mockOnSearch).toHaveBeenCalledWith('Avengers');
-    
-    //expect(results).toBeInTheDocument();
+
   });
 });

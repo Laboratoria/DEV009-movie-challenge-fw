@@ -1,32 +1,33 @@
-/*import React from 'react';
-import { render, screen } from '@testing-library/react';
-import { MemoryRouter } from 'react-router-dom'; // Usamos MemoryRouter para pruebas
-
+import React from 'react';
+import '@testing-library/jest-dom/extend-expect';
+import { render, screen, waitFor } from '@testing-library/react';
+import { MemoryRouter, Routes,Route } from 'react-router-dom';
 import App from './App';
 
-describe('App', () => {
-  it('renders MovieAdmin when on the home page', () => {
+jest.mock('../../assets/img/logo.png');
+
+global.fetch = () => Promise.resolve({
+  json: () => Promise.resolve({ results: [{ title: 'Avengers' }] })
+});
+
+test('renders MovieAdmin component for the root path', () => {
+  render(<App />);
+
+  const movieAdminText = screen.getByText(/WANDERLUST/);
+  expect(movieAdminText).toBeInTheDocument();
+});
+
+/*test('renders MovieDetail component for /movie/:movieId path', () => {
+   
     render(
-      <MemoryRouter initialEntries={['/']}>
-        <App />
+    <MemoryRouter initialEntries={['Avengers']}>
+        <Routes>
+          <Route path="/movie/:movieId" element={<MovieDetail />} />
+        </Routes>
       </MemoryRouter>
     );
+    waitFor
+    // Wait for the component to load with the movie data
+    expect(screen.findByText('Movie 1').toBeInTheDocument());
 
-    // Verificar que el componente MovieAdmin se renderiza en la página de inicio
-    const movieAdminElement = screen.getByText('WANDERLUST MOVIES TRAVELER COMMUNITY');
-    expect(movieAdminElement).toBeInTheDocument();
-  });
-
-  it('renders MovieDetail when on a movie detail page', () => {
-    render(
-      <MemoryRouter initialEntries={['/movie/123']}>
-        <App />
-      </MemoryRouter>
-    );
-
-    // Verificar que el componente MovieDetail se renderiza en la página de detalles de la película
-    const movieDetailElement = screen.getByText('Movie Detail'); // Ajusta esto según lo que contenga tu componente MovieDetail
-    expect(movieDetailElement).toBeInTheDocument();
-  });
-
-});*/
+    });*/

@@ -1,4 +1,4 @@
-# Social Networks AREQUIPA 360
+WANDERLUST MOVIES TRAVELER COMMUNITY
 
 ## Índice
 
@@ -29,36 +29,29 @@ Los lenguajes utilizados fueron HTML semántico, CSS y JavaScript, se uso React.
 ## 4. Historias de Usuario
 
 #### Historia de usabilidad 1
-![user story 1](src/components//img/7.jpg)
+![user story 1](src/assets/img/HU1.png)
 #### Historia de usabilidad 2
-![user story 2](src/components//img/8.jpg)
+![user story 2](src/assets/img/HU2.png)
 #### Historia de usabilidad 3
-![user story 3](src/components//img/9.jpg)
-#### Historia de usabilidad 4
-![user story 4](src/components//img/10.jpg)
+![user story 3](src/assets/img/HU3.png)
+
 ## 5. Prototipos
-Se trabajo en la elaboración de un prototipo a papel ,luego uno de alta fidelidad el cual fue evaluado por nuestras compañeras de las cuales recibi feedback para posteriormente y después de aplicar las sugerencias , volver a solicitarles ayuda en el test de usabilidad.
+Se trabajo en la elaboración de un prototipo de alta fidelidad el cual fue evaluado por nuestras compañeras de las cuales recibi feedback para posteriormente y después de aplicar las sugerencias , volver a solicitarles ayuda en el test de usabilidad.
 
 #### Prototipos de alta fidelidad
-![prototipo alta 1](src/components/img/prototipo-alta.png)
+![prototipo alta 1](src/assets/img/PROTALTA.png)
 
- Prototipo dinámico: [prototipo dinamico](https://www.figma.com/proto/vvNUtz6OP1hfzPwJ7nNjHw/Untitled?type=design&node-id=1-136&t=stdBuyPXIzTgPZDp-1&scaling=scale-down&page-id=0%3A1&starting-point-node-id=1%3A136&show-proto-sidebar=1&mode=design)
+ Prototipo dinámico: [prototipo dinamico](https://www.figma.com/proto/hLXttWAHbL0dDJdtmLFQcX/MOVIE-CHALLENGE?type=design&node-id=311-130&t=eOM1ymnhRx6fVoFf-1&scaling=min-zoom&page-id=0%3A1&mode=design)
 
-#### Listado de problemas de usabilidad detectados 
-
-Hice un test de usabilidad recibiendo como feedback los siguiente.
-![feedback](src/components/img/test-usabilidad-a.png)
-
-Use para el diseño de ambos protipos [Figma](https://www.figma.com/) 
+Use para el diseño del protipo [Figma](https://www.figma.com/) 
 ### Pruebas unitarias
 
-El proyecto cuenta con test para las funciones encargadas de  crear, editar, borrar publicaciones. Asi como mantener al usuario logueado, salir sesión.
+El proyecto cuenta con test para los componentes que incluye tales como MovieAdmin, ListMovies, MovieDetail entre otros, que verifican el correcto renderizado del componente como tal y el redireccionamiento de botones a las rutas correspondientes.
 
 ## 6. Planificación del proyecto
 
 Me planifiqué en Git Hub projects, este me ayudo a optimizar mi proceso y hacerle seguimiento a mi avance diario.
-![plicificacion 1](src/components/img/planificacion-1.png)
-![planificacion 2](src/components/img/planificacion-2.png)
+![plicificacion 1](src/assets/img/plan1.png)
+![planificacion 2](src/assets/img//plan2.png)
 ## 7. Resultado
-![result 1](src/components/img/resultado.png)
-![result 2](src/components/img/resultado-2.png)
+![result 1](src/assets/img/result1.png)

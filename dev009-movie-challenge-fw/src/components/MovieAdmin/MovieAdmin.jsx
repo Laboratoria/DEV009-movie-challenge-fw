@@ -1,6 +1,6 @@
-import React, { useState,useEffect} from 'react';
-import './MovieAdmin.css';
-import { searchMovie, getMovieSorted } from '../../utils/Services/moviesRepository'; 
+import React, { useState} from 'react';
+import './MovieAdmin.css' ;
+import { searchMovie } from '../../utils/Services/moviesRepository'; 
 import Header from '../header/Header';
 import ListMovies from '../ListMovies/ListMovies';
 import OrderBy from '../OrderBy/OrderBy';
@@ -55,8 +55,8 @@ const MovieAdmin = () => {
             src={logo}
             alt="Logo de mi sitio web"
             className="logo"
-          />
-        </div>
+          /> 
+        </div> 
       </div>
 
         <main>
@@ -65,7 +65,7 @@ const MovieAdmin = () => {
               <MovieFilter
                 selectedGenre={selectedGenre} 
                 setSelectedGenre={setSelectedGenre}
-              />
+              /> 
 
               <OrderBy 
                 selectedSortOption={selectedSortOption} 
