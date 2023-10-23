@@ -62,7 +62,7 @@
   align-items: center;
   font-family: var(--font-family-main-text);
 }
-.mainContainer {
+main {
   display: flex;
   background-color: #fff;
   padding: 20px;
@@ -93,4 +93,3 @@
     font-size: small;
   }
 }
-

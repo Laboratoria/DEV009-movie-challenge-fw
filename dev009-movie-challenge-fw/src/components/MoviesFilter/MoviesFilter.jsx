@@ -45,4 +45,3 @@ const MovieFilter = ({ selectedGenre, setSelectedGenre }) => {
 };
 
 export default MovieFilter;
-

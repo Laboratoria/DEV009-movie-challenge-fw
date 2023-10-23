@@ -1,24 +1,27 @@
-import React, { useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import { getMovies } from '../Services/moviesRepository';
 
 export const useMovies = () => {
     const [movies, setMovies] = useState([]);
     const [currentPage, setCurrentPage] = useState(1);
     const [selectedGenre, setSelectedGenre] = useState('all');
+    const [selectedSortOption,setSelectedSortOption]=useState('all');
   
     useEffect(() => {
-      // Call getMovies when currentPage changes
-      getMovies(currentPage,selectedGenre).then(moviesData => {
+      getMovies(currentPage,selectedGenre,selectedSortOption).then(moviesData => {
+        console.log(moviesData);
         setMovies(moviesData);
       });
-    }, [currentPage,selectedGenre]);
+    }, [currentPage,selectedGenre,selectedSortOption]);
   
     return {
       movies,
+      setMovies,
       currentPage,
       setCurrentPage,
       selectedGenre,
       setSelectedGenre,
-      setMovies
+      selectedSortOption,
+      setSelectedSortOption
     };
   };

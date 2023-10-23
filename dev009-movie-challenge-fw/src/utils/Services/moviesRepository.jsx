@@ -1,23 +1,41 @@
 const apiKey = 'ce209e5ff09d9bb827b2cd4025cd595c';
 const apiUrl = 'https://api.themoviedb.org/3';
 
-export const getMovies = (page,genreId) => {
-  
-
-  return fetch(`${apiUrl}/discover/movie?api_key=${apiKey}&page=${page}&with_genres=${genreId}`)
-    .then(response => response.json())
-    .then(responseData => {
-      if (responseData && responseData.results) {
-        return responseData.results;
-      } else {
-        console.error('La respuesta de la API está vacía o no es válida.');
+export const getMovies = (page, genreId, selectedSortOption = 'all') => {
+  // Verifica si se debe utilizar la URL por defecto
+  if (selectedSortOption === 'all') {
+    // Utiliza la URL sin ordenamiento
+    return fetch(`${apiUrl}/discover/movie?api_key=${apiKey}&page=${page}&with_genres=${genreId}`)
+      .then(response => response.json())
+      .then(responseData => {
+        if (responseData && responseData.results) {
+          return responseData.results;
+        } else {
+          console.error('La respuesta de la API está vacía o no es válida.');
+          return [];
+        }
+      })
+      .catch(err => {
+        console.error(err.message);
         return [];
-      }
-    })
-    .catch(err => {
-      console.error(err.message);
-      return [];
-    });
+      });
+  } else {
+    // Utiliza la URL con el ordenamiento especificado
+    return fetch(`${apiUrl}/discover/movie?api_key=${apiKey}&page=${page}&with_genres=${genreId}&sort_by=${selectedSortOption}`)
+      .then(response => response.json())
+      .then(responseData => {
+        if (responseData && responseData.results) {
+          return responseData.results;
+        } else {
+          console.error('La respuesta de la API está vacía o no es válida.');
+          return [];
+        }
+      })
+      .catch(err => {
+        console.error(err.message);
+        return [];
+      });
+  }
 };
 
 
@@ -34,7 +52,7 @@ export const getOne = (movieId) => {
     });
 };
 
-export const getMovieSorted = (page, sortMovies) => {
+export const getMovieSorted = (page, selectedSortOption) => {
   const options = {
     method: 'GET',
     headers: {
@@ -44,11 +62,11 @@ export const getMovieSorted = (page, sortMovies) => {
   };
 
   // Agrega el parámetro sort_by con el valor de sortMovies
-  const apiUrlWithSort = `${apiUrl}/discover/movie/?page=${page}&sort_by=${sortMovies}`;
+  const apiUrlWithSort = `${apiUrl}/discover/movie/?page=${page}&sort_by=${selectedSortOption}`;
 
   return fetch(apiUrlWithSort, options)
     .then(response => response.json())
-    .then(response => response.results) // Asumiendo que deseas trabajar con la lista de películas en results
+    .then(response => response.results)
     .catch(err => console.error(err));
 };
 

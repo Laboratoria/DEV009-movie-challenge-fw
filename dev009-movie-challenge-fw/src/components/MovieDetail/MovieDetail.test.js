@@ -5,6 +5,7 @@ import { MemoryRouter, Route, Routes} from 'react-router-dom';
 import MovieDetail from './MovieDetail';
 
 jest.mock('../../assets/img/logo.png');
+jest.mock('../../assets/svg/error.svg');
 
 jest.mock('react-router-dom', () => ({
   ...jest.requireActual('react-router-dom'), 
