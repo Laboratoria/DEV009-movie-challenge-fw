@@ -6,6 +6,7 @@ import { Link } from 'react-router-dom';
 import logo from '../../assets/img/logo.png';
 import errorImage from '../../assets/svg/error.svg'
 
+
 const MovieDetail = ({ genres }) => {
   const [selectedMovie, setSelectedMovie] = useState({});
   const { movieId } = useParams();
@@ -20,6 +21,8 @@ const MovieDetail = ({ genres }) => {
         console.error('Error al obtener los detalles de la película:', error);
       });
   }, [movieId]);
+
+    
 
   return (
     <div>
@@ -59,8 +62,8 @@ const MovieDetail = ({ genres }) => {
 
           <h4>Overview:</h4>
           <p className="movie-overview">{selectedMovie.overview}</p>
-          <p className="movie-score">{'Score: ' + selectedMovie.vote_average}</p>
-
+          <p className="movie-votes">{'Score: ' + selectedMovie.vote_average}</p>
+          <p className="movie-votes">{'Counted votes: ' + selectedMovie.vote_count}</p>
           <div className="movie-genres">
             <h4>Genres:</h4>
             <ul>

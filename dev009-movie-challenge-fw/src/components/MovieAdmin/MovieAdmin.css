@@ -62,11 +62,11 @@
   align-items: center;
   font-family: var(--font-family-main-text);
 }
-main {
+.content {
   display: flex;
   background-color: #fff;
   padding: 20px;
-  gap: 15px;
+  gap: 25px;
   font-family: var(--font-family-main-text);
 }
 
@@ -92,4 +92,10 @@ main {
   .presentation{
     font-size: small;
   }
+}
+main {
+  display: flex;
+}
+.side{
+  padding:15px;
 }

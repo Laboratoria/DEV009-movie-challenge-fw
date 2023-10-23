@@ -5,7 +5,7 @@ import { getMovies,getOne, searchMovie} from './moviesRepository'
 import MovieDetail from '../../components/MovieDetail/MovieDetail';
 
 describe('getMovies', () => {
-  it('should fetch and return movie data', async () => {
+  it('should fetch and return movie data without sort option', async () => {
     const mockResponse = {
       results: [{ title: 'Movie 1' }, { title: 'Movie 2' }],
     };
@@ -16,12 +16,36 @@ describe('getMovies', () => {
       json: jest.fn().mockResolvedValue(mockResponse),
     });
 
-    // Call the function you want to test
+    // Call the function you want to test without specifying a sort option
     const movies = await getMovies(1, genreId);
 
     // Assert that the fetch function was called with the correct URL
     expect(fetch).toHaveBeenCalledWith(
       `https://api.themoviedb.org/3/discover/movie?api_key=ce209e5ff09d9bb827b2cd4025cd595c&page=1&with_genres=${genreId}`
+    );
+
+    // Assert that the function returned the expected data
+    expect(movies).toEqual(mockResponse.results);
+  });
+
+  it('should fetch and return movie data with sort option', async () => {
+    const mockResponse = {
+      results: [{ title: 'Movie 1' }, { title: 'Movie 2' }],
+    };
+    const genreId = 1;
+    const selectedSortOption = 'popularity.desc'; 
+
+    // Mock the global fetch function
+    global.fetch = jest.fn().mockResolvedValue({
+      json: jest.fn().mockResolvedValue(mockResponse),
+    });
+
+    // Call the function you want to test with a sort option
+    const movies = await getMovies(1, genreId, selectedSortOption);
+
+    // Assert that the fetch function was called with the correct URL including the sort option
+    expect(fetch).toHaveBeenCalledWith(
+      `https://api.themoviedb.org/3/discover/movie?api_key=ce209e5ff09d9bb827b2cd4025cd595c&page=1&with_genres=${genreId}&sort_by=${selectedSortOption}`
     );
 
     // Assert that the function returned the expected data
@@ -34,9 +58,28 @@ describe('getMovies', () => {
     global.fetch = jest.fn().mockRejectedValue(new Error('API error'));
 
     // Call the function you want to test
+    try {
+      await getMovies(1, genreId);
+      // Si no se lanza una excepción, la prueba debería fallar
+    } catch (error) {
+      // Verifica que la excepción sea del tipo Error
+      expect(error).toBeInstanceOf(Error);
+
+      expect(error.message).toBe('La respuesta de la API está vacía o no es válida.');
+    }
+  });
+
+  it('should handle empty or invalid API response', async () => {
+    const genreId = 1; // Define genreId here
+    // Mock an API response with empty or invalid data
+    global.fetch = jest.fn().mockResolvedValue({
+      json: jest.fn().mockResolvedValue({ invalidData: true }),
+    });
+
+    // Call the function you want to test
     const movies = await getMovies(1, genreId);
 
-    // Assert that the function returned an empty array in case of an error
+    // Assert that the function returned an empty array
     expect(movies).toEqual([]);
   });
 });

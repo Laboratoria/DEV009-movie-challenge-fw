@@ -1,3 +1,19 @@
+## 1.1.1 - 2023-10-18
+### Sprint learnings
+
+Aprendi sobre el renderizado de apps para su testeo.Se probo con distintas librerias para añadirle estilos como bootstrap y ahora AntDesign.
+
+### Added
+
+Se agregó test que cubren coponentes al 80%. Se añadió la funcionalidad de Search movies.
+
+### Fixed
+
+Se mejoro los servicios , la manera de como se consumio la API en cuanto al ordenado y buscar.
+
+### Removed
+Se eliminó el file que contenía filtrado por año.
+
 ## 1.1.1 - 2023-10-11
 ### Sprint learnings
 

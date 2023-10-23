@@ -15,7 +15,7 @@ const MovieFilter = ({ selectedGenre, setSelectedGenre }) => {
       .catch((error) => {
         console.error('Error getting genres:', error);
       });
-  }, []);
+  },  [selectedGenre, setSelectedGenre]);
 
   const handleGenreChange = (e) => {
     const newSelectedGenre = e.target.value;

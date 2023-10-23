@@ -7,17 +7,16 @@ import OrderBy from '../OrderBy/OrderBy';
 import MovieFilter from '../MoviesFilter/MoviesFilter';
 import Paginacion from '../Paginacion/Paginacion';
 import { useMovies} from '../../utils/CustomHook/useMovies';
-import { useMovieSorted } from '../../utils/CustomHook/useMovieSorted';
 import logo from '../../assets/img/logo.png';
 
 
 const MovieAdmin = () => {
  
   const { movies, setMovies, currentPage, setCurrentPage, selectedGenre, setSelectedGenre,selectedSortOption,setSelectedSortOption } = useMovies();
-  const itemsPerPage = 20; 
   const [totalPages, setTotalPages] = useState(1);
   const [searchTerm, setSearchTerm] = useState('');
   const [searchResults, setSearchResults] = useState([]);
+  
 
     const handleSearch = (searchTerm) => {
       // Llama a la función de búsqueda
@@ -30,10 +29,13 @@ const MovieAdmin = () => {
           console.error(error);
         });
     }
+
     const handleSortOptionChange = (e) => {
       const newSortOption = e.target.value;
       setSelectedSortOption(newSortOption);
+ 
     };
+    
 
   return (
     <div>
@@ -55,20 +57,12 @@ const MovieAdmin = () => {
           /> 
         </div> 
       </div>
-
+      <div className="content">
         <main>
             <div className="side">
               <div className="filters">
-              <MovieFilter
-                selectedGenre={selectedGenre}
-                setSelectedGenre={setSelectedGenre}
-                selectedSort={selectedSortOption}
-                setSelectedSort={setSelectedSortOption}
-              /> 
-              <OrderBy
-                selectedSortOption={selectedSortOption}
-                handleSortOptionChange={handleSortOptionChange}
-              />
+              <MovieFilter selectedGenre={selectedGenre} setSelectedGenre={setSelectedGenre} />
+              <OrderBy selectedSortOption={selectedSortOption} handleSortOptionChange={handleSortOptionChange} />
               </div>
             </div>
           <div className="movies">
@@ -89,7 +83,8 @@ const MovieAdmin = () => {
           
           </div>
         </main>
-    </div>
+      </div>
+  </div>
   );
 };
 
