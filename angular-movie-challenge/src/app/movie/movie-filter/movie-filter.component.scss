@@ -1,0 +1,33 @@
+
+  /* movie-list.component.scss */
+
+.mat-card {
+    border: 1px solid #ccc;
+    background-color: #f8f8f8;
+    padding: 16px;
+    margin: 30px auto;
+    max-width: 350px;
+    
+    &-header {
+      background-color: #009688;
+      color: white;
+    }
+  
+    &-title {
+      font-size: 20px;
+    }
+  
+    &-subtitle {
+      font-size: 14px;
+    }
+  
+    &-content {
+      font-size: 16px;
+    }
+  
+    &-actions {
+      display: flex;
+      justify-content: space-between;
+    }
+  }
+  

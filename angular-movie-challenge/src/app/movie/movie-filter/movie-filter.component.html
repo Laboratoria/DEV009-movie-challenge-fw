@@ -1,0 +1,71 @@
+<p>movie-filter works!</p>
+
+<!-- Selector para orden -->
+<mat-form-field>
+  <mat-label>Ordenar por:</mat-label>
+  <select matNativeControl required [(ngModel)]="selectSortGenre" (change)="onSortMovieGenres()">
+    <option value="popularity.asc">popularity.asc</option>
+    <option value="popularity.desc">popularity.desc</option>
+    <option value="vote_average.asc">vote_average.asc</option>
+    <option value="vote_average.desc">vote_average.desc</option>
+    <option value="original_title.asc">Title (A-Z)</option>
+    <option value="original_title.desc">Title (Z-A)</option>
+  </select>
+</mat-form-field>
+
+<div class="content-select">
+  <label for="genreSelect">Genres:</label>
+  <select id="genreSelect" [(ngModel)]="selectGenreId" (change)="onGenreSelect()">
+    <option value="">Select genres</option>
+    <option *ngFor="let genre of genres" [value]="genre.id">{{ genre.name }}</option>
+  </select>
+</div>
+
+<!--CADS - MOVIES ANGULAR MATERIAL-->
+<div class="content-card">
+  <div class="card-content" *ngFor="let movie of movies">
+    <mat-card class="mat-card">
+      <mat-card-subtitle>{{ movie.release_date | date:'dd-MMM-yyyy' }}</mat-card-subtitle>
+      <ng-container *ngIf="movie.poster_path">
+        <img [src]="'https://image.tmdb.org/t/p/w500/' + movie.poster_path" alt="{{ movie.title }}">
+      </ng-container>
+      <mat-card-header class="mat-card-header">
+        <mat-card-title>{{ movie.title }}</mat-card-title>
+      </mat-card-header>
+      <mat-card-content>
+        <p>Promedio de votación: {{ movie.vote_average }}</p>
+        <p>Total de votos: {{ movie.vote_count }}</p>
+      </mat-card-content>
+      <mat-card-actions>
+        <button mat-button>LIKE</button>
+        <button mat-button>SHARE</button>
+        <a [routerLink]="['/movie', movie.id]">Ver detalles</a>
+      </mat-card-actions>
+    </mat-card>
+  </div>
+</div>
+
+<nav aria-label="Page navigation">
+  <ul class="pagination justify-content-center" >
+    <li class="page-item" [class.disabled]="currentPageGenre === 1">
+      <a class="page-link" (click)="prevPageGenre()">Prev</a>
+    </li>
+    <li class="page-item" *ngFor="let page of pages" [class.active]="currentPageGenre === page">
+
+      <a class="page-link" (click)="currentPageGenre = page">{{ page }}</a>
+    </li>
+    <li class="page-item" [class.disabled]="currentPageGenre=== totalPagesGenre">
+      <a class="page-link" (click)="nextPageGenre()">Next</a>
+    </li>
+  </ul>
+</nav>
+
+
+
+
+
+  
+
+
+
+  

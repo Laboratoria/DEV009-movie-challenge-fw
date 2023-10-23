@@ -1,0 +1,12 @@
+<p>movie-detail works!</p>
+
+<div *ngIf="movie">
+    <img [src]="'https://image.tmdb.org/t/p/w500/' + movie.poster_path" alt="{{ movie.title }}">
+    <h1>{{ movie.title }}</h1>
+    <p>Géneros: {{ detailsGenres }}</p>
+    <p>Sinopsis:{{ movie.overview}}</p>
+
+    <p>Año de lanzamiento: {{ movie.release_date |  date:'dd/MM/yyyy'}}</p>
+    <!-- Otros detalles de la película -->
+  </div>
+  

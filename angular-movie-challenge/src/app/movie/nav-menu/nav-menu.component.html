@@ -1,0 +1,40 @@
+<mat-sidenav-container autosize>
+  <mat-sidenav #sidenav mode="side" opened="isExpanded">
+    <mat-nav-list>
+
+      <mat-list-item (click)="isExpanded = !isExpanded">
+        <mat-icon mat-list-icon class="chevron-button" [ngClass]="{ rotated: isExpanded }">chevron_right
+        </mat-icon>
+      </mat-list-item>
+
+      <mat-list-item [routerLink]="'search'">
+        <mat-icon mat-list-icon>search</mat-icon>
+        <span *ngIf="isExpanded" class="menu-item">Search</span>
+      </mat-list-item>
+
+      <mat-list-item [routerLink]="'movie-list'">
+        <mat-icon mat-list-icon>home</mat-icon>
+        <span *ngIf="isExpanded" class="menu-item">Home</span>
+      </mat-list-item>
+
+      <mat-list-item [routerLink]="'movie-filter'">
+        <mat-icon mat-list-icon>movie_filter</mat-icon>
+        <span *ngIf="isExpanded" class="menu-item">Movies</span>
+      </mat-list-item>
+
+    </mat-nav-list>
+  </mat-sidenav>
+
+  <!-- Content - rendered Content for the current router path into the <router-outlet>-->
+
+
+  <mat-sidenav-content>
+    <mat-toolbar color="primary">
+      <h1 class="title-sidenav">MovieChallenge</h1>
+    </mat-toolbar>
+    <div class="content-div" style="height: 90vh;">
+      <router-outlet></router-outlet>
+    </div>
+  </mat-sidenav-content>
+
+</mat-sidenav-container>
